@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Hair Loss Companion Kit by Chiranjivi Notes® — An evidence-based interactive patient workbook.">
+<title>Hair Loss Companion Kit — Chiranjivi Notes®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   CHIRANJIVI NOTES® DESIGN SYSTEM v2.0
+   Hair Loss Companion Kit
+═══════════════════════════════════════════════════════ */
+
+/* --- TOKENS --- */
+:root {
+  --ground:#0f0e0c; --paper:#f7f4ef; --paper-warm:#f0ece4; --paper-teal:#eef3f2;
+  --ink:#232018; --ink-light:#4a4438; --ink-faint:#7a7068;
+  --teal:#4a908a; --teal-dim:#3a706a; --teal-pale:rgba(74,144,138,0.10);
+  --ochre:#c09553; --ochre-pale:rgba(192,149,83,0.12);
+  --sage:#7a9e8a; --sage-pale:rgba(122,158,138,0.10);
+  --slate:#6b7b8d; --slate-pale:rgba(107,123,141,0.10);
+  --brick:#a05448; --brick-pale:rgba(160,84,72,0.10);
+  --shadow-card:0 6px 24px rgba(35,32,24,0.07),0 2px 8px rgba(35,32,24,0.05);
+  --shadow-lift:0 18px 60px rgba(15,14,12,0.16),0 4px 16px rgba(15,14,12,0.08);
+  --serif:'Cormorant Garamond','Palatino Linotype',Georgia,serif;
+  --body:'EB Garamond','Palatino Linotype',Georgia,serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --max-w:720px; --col-w:620px;
+}
+
+/* --- RESET --- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--ground);font-family:var(--body);color:var(--ink);line-height:1.78;min-height:100vh;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-size:200px;pointer-events:none;z-index:9999;opacity:.35;mix-blend-mode:multiply;}
+::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-track{background:var(--ground);} ::-webkit-scrollbar-thumb{background:var(--teal-dim);}
+
+/* --- REDUCED MOTION --- */
+@media (prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;transition-duration:0.01ms!important;scroll-behavior:auto!important;}}
+
+/* ════════════════════════════════════
+   SPLASH SCREEN
+════════════════════════════════════ */
+#cn-splash{position:fixed;inset:0;z-index:5000;background:linear-gradient(165deg,#14130f,#0f0e0c 50%,#0c0b09);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;transition:opacity .9s var(--ease),visibility .9s;}
+#cn-splash.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.sp-mono{width:64px;height:64px;border-radius:50%;border:1px solid rgba(74,144,138,.5);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;font-family:var(--serif);font-size:1rem;color:var(--teal);position:relative;animation:spPulse 3s ease infinite;}
+.sp-mono::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(74,144,138,.18);}
+@keyframes spPulse{0%,100%{box-shadow:0 0 0 0 rgba(74,144,138,.2);}50%{box-shadow:0 0 0 12px rgba(74,144,138,0);}}
+.sp-brand{font-family:var(--serif);font-size:.58rem;letter-spacing:.42em;text-transform:uppercase;color:var(--teal);opacity:.7;margin-bottom:1.6rem;}
+.sp-title{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,5vw,2.8rem);color:var(--paper);line-height:1.2;margin-bottom:.4rem;}
+.sp-title em{font-style:italic;color:var(--teal);}
+.sp-meta{font-family:var(--serif);font-size:.68rem;color:var(--paper);opacity:.3;letter-spacing:.12em;margin-bottom:2.2rem;line-height:2;}
+.sp-tag{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--paper);opacity:.45;margin-bottom:2.8rem;}
+.sp-track{width:160px;height:2px;background:rgba(74,144,138,.15);margin:0 auto 1.4rem;}
+.sp-bar{height:2px;width:0%;background:var(--teal);transition:width 2.8s cubic-bezier(.4,0,.2,1);}
+.sp-hint{font-family:var(--serif);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);opacity:.4;}
+
+/* ════════════════════════════════════
+   STICKY NAV
+════════════════════════════════════ */
+#cn-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(15,14,12,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(74,144,138,.15);padding:.6rem 1.4rem;display:flex;align-items:center;gap:.8rem;transform:translateY(-100%);transition:transform .35s ease;}
+#cn-nav.show{transform:translateY(0);}
+.nav-brand{font-family:var(--serif);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);opacity:.72;flex-shrink:0;}
+.nav-dots{display:flex;gap:.3rem;}
+.nav-dot{width:5px;height:5px;border-radius:50%;border:1px solid rgba(74,144,138,.3);background:transparent;transition:background .2s,transform .18s;}
+.nav-dot.done{background:var(--teal-dim);border-color:var(--teal-dim);}
+.nav-dot.active{background:var(--teal);border-color:var(--teal);transform:scale(1.5);}
+.nav-section{font-family:var(--serif);font-size:.6rem;color:var(--teal);opacity:.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;flex-shrink:0;letter-spacing:.05em;}
+.nav-saved{font-family:var(--serif);font-size:.55rem;letter-spacing:.1em;color:var(--teal);opacity:0;transition:opacity .4s;flex-shrink:0;}
+.nav-saved.show{opacity:.72;}
+.nav-pct{font-family:var(--serif);font-size:.55rem;letter-spacing:.12em;color:var(--teal);opacity:.55;margin-left:auto;white-space:nowrap;flex-shrink:0;}
+
+/* ════════════════════════════════════
+   RESUME BANNER
+════════════════════════════════════ */
+#cn-resume{position:fixed;bottom:0;left:0;right:0;z-index:400;background:rgba(15,14,12,.97);backdrop-filter:blur(14px);border-top:1px solid rgba(74,144,138,.2);padding:1rem 1.4rem;display:none;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+#cn-resume.show{display:flex;}
+.rb-text{font-family:var(--serif);font-size:.88rem;color:var(--paper);opacity:.75;}
+.rb-text em{color:var(--teal);font-style:normal;}
+.rb-btns{display:flex;gap:.6rem;}
+.rb-btn{font-family:var(--serif);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.55rem 1.2rem;cursor:pointer;border:1px solid;background:transparent;transition:all .25s;min-height:44px;}
+.rb-btn.primary{color:var(--teal);border-color:rgba(74,144,138,.4);}
+.rb-btn.primary:hover,.rb-btn.primary:focus{background:rgba(74,144,138,.12);border-color:var(--teal);outline:2px solid var(--teal);outline-offset:2px;}
+.rb-btn.dismiss{color:var(--ink-faint);border-color:rgba(122,112,104,.2);}
+.rb-btn.dismiss:hover,.rb-btn.dismiss:focus{color:var(--paper);border-color:rgba(122,112,104,.4);outline:2px solid var(--teal);outline-offset:2px;}
+
+/* ════════════════════════════════════
+   SCROLL PROGRESS
+════════════════════════════════════ */
+#cn-prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--teal-dim),var(--teal));z-index:300;pointer-events:none;transition:width .08s linear;}
+
+/* ════════════════════════════════════
+   FLOATING CONTROLS
+════════════════════════════════════ */
+#cn-btt{position:fixed;bottom:1.2rem;right:1.2rem;z-index:150;width:44px;height:44px;border-radius:2px;border:1px solid rgba(74,144,138,.3);background:rgba(15,14,12,.9);backdrop-filter:blur(8px);color:var(--teal);cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .35s var(--ease),transform .35s var(--ease),background .25s;}
+#cn-btt.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+#cn-btt:hover,#cn-btt:focus{background:rgba(74,144,138,.12);border-color:var(--teal);outline:2px solid var(--teal);outline-offset:2px;}
+#cn-btt svg{width:14px;height:14px;}
+.cn-fs-wrap{position:fixed;bottom:4.6rem;right:1.2rem;z-index:150;display:flex;flex-direction:column;gap:.35rem;}
+.cn-fs-btn{width:44px;height:44px;border-radius:2px;border:1px solid rgba(74,144,138,.28);background:rgba(15,14,12,.9);backdrop-filter:blur(8px);color:var(--teal);cursor:pointer;font-family:var(--serif);font-size:.78rem;display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s;}
+.cn-fs-btn:hover,.cn-fs-btn:focus{background:rgba(74,144,138,.12);border-color:var(--teal);outline:2px solid var(--teal);outline-offset:2px;}
+
+/* ════════════════════════════════════
+   TOAST
+════════════════════════════════════ */
+#cn-toast{position:fixed;bottom:3.5rem;left:50%;z-index:500;transform:translateX(-50%) translateY(16px);background:rgba(15,14,12,.96);border:1px solid rgba(74,144,138,.28);color:var(--teal);font-family:var(--serif);font-size:.68rem;letter-spacing:.1em;padding:.6rem 1.4rem;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;white-space:nowrap;border-radius:1px;}
+#cn-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ════════════════════════════════════
+   WORKBOOK WRAPPER
+════════════════════════════════════ */
+#cn-workbook{max-width:var(--max-w);margin:0 auto;padding:0 1rem 8rem;perspective:1400px;}
+
+/* ════════════════════════════════════
+   COVER PAGE
+════════════════════════════════════ */
+.cn-cover{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:5rem 2rem;position:relative;overflow:hidden;text-align:center;}
+.cn-cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 22% 28%,rgba(74,144,138,.12) 0%,transparent 52%),radial-gradient(ellipse at 80% 18%,rgba(192,149,83,.06) 0%,transparent 45%),linear-gradient(165deg,#14130f,#0f0e0c 45%,#0c0b09);z-index:0;}
+.cover-illus{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(640px,110vw);height:min(640px,110vw);z-index:0;pointer-events:none;}
+.ci-pulse{animation:ciPulse 12s ease infinite;transform-origin:center;}
+.ci-rot{animation:ciRot 240s linear infinite;transform-origin:center;}
+@keyframes ciPulse{0%,100%{opacity:.55;transform:scale(1);}50%{opacity:.9;transform:scale(1.035);}}
+@keyframes ciRot{to{transform:rotate(360deg);}}
+.cover-inner{position:relative;z-index:1;max-width:480px;}
+.cover-mono{width:58px;height:58px;border-radius:50%;border:1px solid rgba(74,144,138,.5);display:flex;align-items:center;justify-content:center;margin:0 auto 2.2rem;font-family:var(--serif);font-size:1rem;color:var(--teal);position:relative;}
+.cover-mono::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(74,144,138,.18);}
+.cover-kicker{font-family:var(--serif);font-size:.6rem;letter-spacing:.38em;text-transform:uppercase;color:var(--teal);opacity:.65;margin-bottom:1.4rem;}
+.cover-h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,6vw,3.4rem);color:var(--paper);line-height:1.16;margin-bottom:.5rem;letter-spacing:-.01em;}
+.cover-h1 em{font-style:italic;color:var(--teal);}
+.cover-sub{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--paper);opacity:.42;margin-bottom:3rem;}
+.cover-rule{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:.45;margin:0 auto 2.8rem;}
+.cover-epigraph{font-family:var(--serif);font-style:italic;font-size:1.02rem;color:var(--paper);opacity:.55;line-height:1.9;margin-bottom:2.8rem;}
+.cover-cta{font-family:var(--serif);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(74,144,138,.4);padding:.82rem 2rem;background:transparent;cursor:pointer;transition:background .4s,border-color .4s,letter-spacing .4s;}
+.cover-cta:hover,.cover-cta:focus{background:rgba(74,144,138,.1);border-color:var(--teal);letter-spacing:.34em;outline:2px solid var(--teal);outline-offset:3px;}
+
+/* ════════════════════════════════════
+   CHAPTER HEADER
+════════════════════════════════════ */
+.cn-chapter{min-height:96vh;display:flex;align-items:center;padding:5rem 3rem;position:relative;overflow:hidden;--co:#4a908a;}
+.cn-chapter::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 28% 50%,color-mix(in srgb,var(--co) 9%,transparent) 0%,transparent 62%),radial-gradient(ellipse at 88% 14%,color-mix(in srgb,var(--co) 5%,transparent) 0%,transparent 50%);}
+.cn-chapter::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--co) 45%,transparent),transparent);}
+.ch-illus{position:absolute;right:-4%;top:50%;transform:translateY(-50%);width:min(46vw,460px);height:min(46vw,460px);opacity:.42;pointer-events:none;z-index:0;}
+@media(max-width:760px){.ch-illus{width:78vw;height:78vw;right:50%;top:14%;transform:translate(50%,0);opacity:.26;}}
+.ch-inner{position:relative;z-index:1;max-width:var(--col-w);}
+.ch-icon{font-size:1.2rem;color:var(--co);opacity:.65;margin-bottom:1.4rem;display:block;}
+.ch-kicker{font-family:var(--serif);font-size:.58rem;letter-spacing:.36em;text-transform:uppercase;color:var(--co);opacity:.65;display:block;margin-bottom:.6rem;}
+.ch-title{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,4.5vw,2.8rem);color:var(--paper);line-height:1.18;margin-bottom:.8rem;}
+.ch-desc{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--paper);opacity:.42;line-height:1.7;max-width:30em;}
+.ch-rule{width:40px;height:1px;margin:1.8rem 0 0;background:linear-gradient(90deg,var(--co),transparent);opacity:.5;}
+
+/* ════════════════════════════════════
+   SECTION DIVIDER
+════════════════════════════════════ */
+.cn-div{display:flex;align-items:center;justify-content:center;padding:2.2rem 0;opacity:0;transform:translateY(10px) scale(.96);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.cn-div.vis{opacity:.85;transform:translateY(0) scale(1);}
+
+/* ════════════════════════════════════
+   PULL QUOTE
+════════════════════════════════════ */
+.cn-pull{min-height:55vh;display:flex;align-items:center;justify-content:center;padding:5rem 3rem;opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease);}
+.cn-pull.vis{opacity:1;transform:translateY(0);}
+.cn-pull.dark{background:transparent;}
+.cn-pull.light{background:var(--paper-warm);}
+.pull-inner{max-width:480px;text-align:center;}
+.pull-qm{font-family:var(--serif);font-size:4rem;color:var(--teal);opacity:.25;line-height:1;display:block;margin-bottom:-1rem;}
+.pull-diamonds{color:var(--teal);opacity:.35;font-size:.7rem;display:block;margin-bottom:1.4rem;letter-spacing:.4em;}
+.pull-text{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1.2rem,3vw,1.65rem);color:var(--paper);line-height:1.55;}
+.cn-pull.light .pull-text{color:var(--ink);}
+
+/* ════════════════════════════════════
+   BASE CARD
+════════════════════════════════════ */
+.cn-card{background:var(--paper);padding:3rem 3.5rem;margin-bottom:2.5rem;position:relative;box-shadow:var(--shadow-card);opacity:0;transform:translateY(28px) rotateX(2deg) scale(.985);transform-origin:top center;transition:opacity .7s var(--ease),transform .7s var(--ease),box-shadow .5s var(--ease);}
+.cn-card.vis{opacity:1;transform:translateY(0) rotateX(0) scale(1);box-shadow:var(--shadow-lift);}
+/* accent stripe */
+.cn-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal) 0%,transparent 100%);opacity:.55;}
+.cn-card.acc-ochre::before{background:linear-gradient(90deg,var(--ochre) 0%,transparent 100%);}
+.cn-card.acc-sage::before{background:linear-gradient(90deg,var(--sage) 0%,transparent 100%);}
+.cn-card.acc-slate::before{background:linear-gradient(90deg,var(--slate) 0%,transparent 100%);}
+.cn-card.acc-brick::before{background:linear-gradient(90deg,var(--brick) 0%,transparent 100%);}
+/* footer branding */
+.cn-card::after{content:'Chiranjivi Notes ae2 b72Hair Loss Companion Kit2 b72v2.02 b72 a9 20262 b72For personal educational use only';display:block;margin-top:2rem;padding-top:.8rem;border-top:1px solid rgba(74,144,138,.1);font-family:var(--serif);font-size:.55rem;letter-spacing:.14em;color:var(--teal);opacity:.28;text-align:center;}
+/* card touched indicator */
+.cn-card.touched .card-tick{display:flex;}
+.card-tick{position:absolute;top:1.35rem;left:1.55rem;width:21px;height:21px;border-radius:50%;background:var(--teal);color:var(--paper);display:none;align-items:center;justify-content:center;font-size:.6rem;pointer-events:none;aria-hidden:true;}
+/* card variants */
+.cn-card.warm{background:var(--paper-warm);}
+.cn-card.teal-bg{background:var(--paper-teal);}
+/* card header elements */
+.card-badge{position:absolute;top:1.4rem;right:1.8rem;font-family:var(--serif);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-dim);opacity:.6;}
+.card-kicker{font-family:var(--serif);font-size:.57rem;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);opacity:.6;display:block;margin-bottom:.5rem;}
+.card-kicker.ochre{color:var(--ochre);} .card-kicker.sage{color:var(--sage);} .card-kicker.slate{color:var(--slate);} .card-kicker.brick{color:var(--brick);}
+.card-title{font-family:var(--serif);font-weight:400;font-size:clamp(1.4rem,3vw,1.9rem);color:var(--ink);line-height:1.2;margin-bottom:.3rem;}
+.card-sub{font-family:var(--serif);font-style:italic;font-size:.95rem;color:var(--ink-light);opacity:.72;margin-bottom:1rem;line-height:1.65;}
+.card-rule{border:none;border-top:1px solid rgba(74,144,138,.18);margin:1rem 0 1.4rem;}
+.card-rule.ochre{border-top-color:rgba(192,149,83,.2);} .card-rule.sage{border-top-color:rgba(122,158,138,.2);} .card-rule.slate{border-top-color:rgba(107,123,141,.2);} .card-rule.brick{border-top-color:rgba(160,84,72,.2);}
+.card-closer{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--ink-light);opacity:.55;margin-top:1.4rem;padding-top:1rem;border-top:1px solid rgba(74,144,138,.1);line-height:1.7;}
+
+/* ════════════════════════════════════
+   CONTENT BLOCK COMPONENTS
+════════════════════════════════════ */
+/* Body text */
+.cn-body{font-size:1.02rem;color:var(--ink);line-height:1.82;margin-bottom:.9rem;}
+.cn-body:last-child{margin-bottom:0;}
+/* Subsection heading */
+.cn-sub{font-family:var(--serif);font-weight:500;font-size:1rem;color:var(--ink);margin:1.4rem 0 .4rem;}
+
+/* DoctorPearl */
+.cn-pearl{border:1px solid rgba(192,149,83,.3);background:rgba(192,149,83,.06);padding:1.2rem 1.4rem;margin:1.2rem 0;position:relative;}
+.cn-pearl::before{content:'»6';position:absolute;top:-.55rem;left:1rem;background:var(--paper);padding:0 .3rem;color:var(--ochre);font-size:.6rem;opacity:.8;}
+.pearl-lbl{font-family:var(--serif);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ochre);opacity:.8;display:block;margin-bottom:.4rem;}
+.pearl-body{font-size:.93rem;color:var(--ink-light);line-height:1.72;font-style:italic;}
+/* warm-card variant: white background for ::before */
+.warm .cn-pearl::before,.warm .cn-note::before{background:var(--paper-warm);}
+
+/* EvidenceBox */
+.cn-evidence{border:1px solid rgba(122,158,138,.25);background:var(--sage-pale);padding:1.2rem 1.4rem;margin:1.2rem 0;}
+.ev-lbl{font-family:var(--serif);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);opacity:.8;display:block;margin-bottom:.4rem;}
+
+/* SafetyAlert */
+.cn-safety{border:1px solid rgba(160,84,72,.22);background:var(--brick-pale);padding:1.2rem 1.4rem;margin:1.2rem 0;}
+.sa-lbl{font-family:var(--serif);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--brick);opacity:.8;display:block;margin-bottom:.4rem;}
+
+/* ReassuranceBox */
+.cn-reassure{background:var(--ochre-pale);border:1px solid rgba(192,149,83,.25);padding:1.2rem 1.4rem;margin:1.2rem 0;text-align:center;}
+.cn-reassure p{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--ink);line-height:1.72;}
+
+/* CalloutBox */
+.cn-callout{background:var(--teal-pale);border-left:3px solid var(--teal);padding:1.1rem 1.3rem;margin:1.2rem 0;}
+.cn-callout.ochre{background:var(--ochre-pale);border-left-color:var(--ochre);}
+.cn-callout.sage{background:var(--sage-pale);border-left-color:var(--sage);}
+.cn-callout.brick{background:var(--brick-pale);border-left-color:var(--brick);}
+.cn-callout.slate{background:var(--slate-pale);border-left-color:var(--slate);}
+.cl-lbl{font-family:var(--serif);font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);opacity:.8;display:block;margin-bottom:.35rem;}
+.cn-callout.ochre .cl-lbl{color:var(--ochre);} .cn-callout.sage .cl-lbl{color:var(--sage);} .cn-callout.brick .cl-lbl{color:var(--brick);} .cn-callout.slate .cl-lbl{color:var(--slate);}
+.cl-body{font-size:.95rem;color:var(--ink);line-height:1.7;}
+
+/* Note box (teal border) */
+.cn-note{border:1px solid rgba(74,144,138,.22);background:rgba(74,144,138,.04);padding:1.2rem 1.4rem;margin:1.2rem 0;position:relative;}
+.cn-note::before{content:'C6';position:absolute;top:-.5rem;left:1rem;background:var(--paper);padding:0 .3rem;color:var(--teal);font-size:.55rem;opacity:.6;}
+.note-lbl{font-family:var(--serif);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);opacity:.75;display:block;margin-bottom:.4rem;}
+.note-body{font-size:.93rem;color:var(--ink-light);line-height:1.72;}
+
+/* RefBox */
+.cn-ref{background:rgba(74,144,138,.04);border-left:3px solid rgba(74,144,138,.3);padding:1.2rem 1.4rem;margin:1.4rem 0;}
+.cn-ref.ochre{border-left-color:rgba(192,149,83,.4);background:rgba(192,149,83,.04);}
+.ref-lbl{font-family:var(--serif);font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);opacity:.7;display:block;margin-bottom:.5rem;}
+.ref-q{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--ink-light);margin-bottom:.5rem;line-height:1.6;}
+
+/* Numbered list */
+.cn-ol{list-style:none;counter-reset:nl;margin-bottom:.9rem;}
+.cn-ol li{display:flex;align-items:baseline;gap:.65rem;margin-bottom:.72rem;counter-increment:nl;font-size:.95rem;color:var(--ink);line-height:1.7;}
+.cn-ol li::before{content:counter(nl);font-family:var(--serif);font-size:.7rem;color:var(--teal);font-weight:500;min-width:1.2rem;opacity:.8;flex-shrink:0;}
+
+/* MythVsFact (inline in InfoCard) */
+.cn-myth{border:1px solid rgba(74,144,138,.22);background:rgba(74,144,138,.04);padding:1.2rem 1.4rem;margin-bottom:.8rem;position:relative;}
+.cn-myth::before{content:'C6';position:absolute;top:-.5rem;left:1rem;background:var(--paper);padding:0 .3rem;color:var(--teal);font-size:.55rem;opacity:.6;}
+.myth-lbl-m{font-family:var(--serif);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--brick);opacity:.8;display:block;margin-bottom:.35rem;}
+.myth-lbl-f{font-family:var(--serif);font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--sage);opacity:.8;display:block;margin:.5rem 0 .35rem;}
+.myth-text{font-size:.93rem;color:var(--ink-light);line-height:1.72;}
+.myth-text.italic{font-style:italic;}
+
+/* Glossary */
+.cn-gloss-item{margin-bottom:1.2rem;}
+.gloss-w{font-family:var(--serif);font-weight:500;font-size:1rem;color:var(--teal);margin-bottom:.2rem;}
+.gloss-d{font-size:.93rem;color:var(--ink);line-height:1.72;}
+.gloss-hr{border:none;border-top:1px solid rgba(74,144,138,.1);margin:.6rem 0;}
+
+/* ════════════════════════════════════
+   FORM COMPONENTS
+════════════════════════════════════ */
+.f-group{margin-bottom:1rem;}
+.f-label{font-family:var(--serif);font-size:.78rem;color:var(--ink-light);opacity:.75;display:block;margin-bottom:.25rem;}
+.f-input{width:100%;border:none;border-bottom:1.5px solid rgba(74,144,138,.2);background:transparent;font-family:var(--body);font-size:.95rem;color:var(--ink);padding:.4rem 0;outline:none;min-height:44px;}
+.f-input:focus{border-bottom-color:var(--teal);box-shadow:0 2px 0 rgba(74,144,138,.12);}
+.f-area{width:100%;border:none;border-bottom:1.5px solid rgba(74,144,138,.2);background:transparent;font-family:var(--body);font-size:.95rem;color:var(--ink);padding:.5rem 0;outline:none;resize:vertical;min-height:4rem;line-height:1.65;}
+.f-area.lg{min-height:7rem;}
+.f-area:focus{border-bottom-color:var(--teal);}
+.f-input::placeholder,.f-area::placeholder{color:var(--teal-dim);opacity:.4;font-style:italic;}
+.f-select{width:100%;border:none;border-bottom:1.5px solid rgba(74,144,138,.2);background:transparent;font-family:var(--body);font-size:.95rem;color:var(--ink);padding:.4rem 0;outline:none;cursor:pointer;-webkit-appearance:none;min-height:44px;}
+.f-select:focus{border-bottom-color:var(--teal);}
+.f-pair{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1rem;}
+.f-trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1rem;}
+
+/* Checklist */
+.cn-chk-grid{display:grid;grid-template-columns:1fr 1fr;gap:.45rem;margin:1rem 0;}
+.cn-chk-grid.col1{grid-template-columns:1fr;}
+.cn-chk{display:flex;align-items:flex-start;gap:.6rem;cursor:pointer;padding:.55rem .75rem;border:1px solid rgba(74,144,138,.12);transition:background .2s,border-color .2s;}
+.cn-chk:hover{background:rgba(74,144,138,.05);border-color:rgba(74,144,138,.25);}
+.cn-chk input[type="checkbox"]{width:18px;height:18px;flex-shrink:0;margin-top:.12rem;accent-color:var(--teal);cursor:pointer;}
+.cn-chk-lbl{font-family:var(--body);font-size:.88rem;color:var(--ink);line-height:1.5;}
+
+/* Action plan checklist (strikethrough on check) */
+.cn-action-list{list-style:none;margin:1rem 0;}
+.cn-action-item{display:flex;align-items:flex-start;gap:.75rem;padding:.7rem 0;border-bottom:1px solid rgba(74,144,138,.1);}
+.cn-action-item:last-child{border-bottom:none;}
+.cn-action-item input[type="checkbox"]{width:18px;height:18px;flex-shrink:0;margin-top:.12rem;accent-color:var(--teal);cursor:pointer;}
+.cn-action-text{font-size:.95rem;color:var(--ink);line-height:1.6;}
+.cn-action-item input:checked ~ .cn-action-text{color:var(--ink-faint);text-decoration:line-through;opacity:.6;}
+
+/* RatingSelector (pills) */
+.cn-rating{display:flex;gap:.4rem;flex-wrap:wrap;margin:.6rem 0;}
+.cn-rating input[type="radio"]{position:absolute;opacity:0;width:0;height:0;}
+.cn-rating label{font-family:var(--serif);font-size:.82rem;color:var(--ink-light);border:1px solid rgba(74,144,138,.18);padding:.45rem .9rem;cursor:pointer;transition:all .2s;min-height:44px;display:flex;align-items:center;}
+.cn-rating input:checked + label{background:var(--teal);color:var(--paper);border-color:var(--teal);}
+.cn-rating label:hover{border-color:var(--teal);background:rgba(74,144,138,.07);}
+.cn-rating input:focus + label{outline:2px solid var(--teal);outline-offset:2px;}
+
+/* DataTable */
+.cn-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.88rem;}
+.cn-table th{font-family:var(--serif);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);opacity:.7;padding:.5rem .75rem;border-bottom:1px solid rgba(74,144,138,.2);text-align:left;font-weight:400;}
+.cn-table td{padding:.55rem .75rem;border-bottom:1px solid rgba(74,144,138,.08);vertical-align:top;}
+.cn-table td input,.cn-table td textarea{width:100%;border:none;background:transparent;font-family:var(--body);font-size:.88rem;color:var(--ink);outline:none;resize:none;min-height:1.5rem;}
+.cn-table td input{min-height:36px;}
+.cn-table td input:focus,.cn-table td textarea:focus{background:rgba(74,144,138,.04);}
+.cn-table tr:last-child td{border-bottom:none;}
+
+/* ScoreCard */
+.cn-score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1rem;margin:1rem 0;}
+.cn-score-card{border:1px solid rgba(74,144,138,.15);padding:1rem;text-align:center;background:rgba(74,144,138,.03);}
+.sc-lbl{font-family:var(--serif);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);opacity:.65;display:block;margin-bottom:.6rem;}
+.sc-input{width:55px;border:none;border-bottom:1.5px solid rgba(74,144,138,.25);background:transparent;font-family:var(--serif);font-size:1.6rem;color:var(--teal);text-align:center;outline:none;font-weight:300;min-height:44px;}
+.sc-input:focus{border-bottom-color:var(--teal);}
+.sc-max{font-family:var(--serif);font-size:.7rem;color:var(--ink-faint);opacity:.5;}
+
+/* MonthGrid */
+.cn-month-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin:1.2rem 0;}
+.cn-month-card{border:1px solid rgba(74,144,138,.15);padding:1rem;background:rgba(74,144,138,.03);}
+.mc-lbl{font-family:var(--serif);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);opacity:.7;display:block;margin-bottom:.6rem;}
+
+/* Timeline */
+.cn-timeline{position:relative;padding-left:2rem;margin:1rem 0;}
+.cn-timeline::before{content:'';position:absolute;left:.45rem;top:0;bottom:0;width:1px;background:linear-gradient(180deg,var(--teal),transparent);opacity:.25;}
+.tl-item{position:relative;margin-bottom:1.4rem;}
+.tl-item::before{content:'';position:absolute;left:-1.65rem;top:.45rem;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--teal);background:var(--paper);opacity:.7;}
+.tl-date{font-family:var(--serif);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);opacity:.65;display:block;margin-bottom:.3rem;}
+
+/* PhotoGrid */
+.cn-photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;margin:1rem 0;}
+.cn-photo-slot{border:1.5px dashed rgba(74,144,138,.25);padding:1rem .5rem;text-align:center;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;background:rgba(74,144,138,.03);transition:background .2s,border-color .2s;}
+.cn-photo-slot:hover{background:rgba(74,144,138,.07);border-color:rgba(74,144,138,.4);}
+.ps-icon{font-size:1.2rem;opacity:.35;}
+.ps-lbl{font-family:var(--serif);font-size:.7rem;color:var(--teal-dim);opacity:.7;letter-spacing:.08em;}
+
+/* MilestoneRow */
+.cn-milestone-row{display:flex;gap:.7rem;flex-wrap:wrap;margin:1rem 0;}
+.cn-milestone{display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.8rem 1rem;border:1px solid rgba(74,144,138,.18);background:rgba(74,144,138,.04);min-width:100px;text-align:center;opacity:.38;transition:opacity .4s,border-color .4s,background .4s;}
+.cn-milestone.earned{opacity:1;border-color:rgba(74,144,138,.4);background:rgba(74,144,138,.08);}
+.ms-icon{font-size:1.4rem;line-height:1;}
+.ms-lbl{font-family:var(--serif);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);opacity:.8;line-height:1.4;}
+
+/* ProgressSummary */
+.cn-prog-summary{background:rgba(74,144,138,.05);border:1px solid rgba(74,144,138,.15);padding:1.4rem 1.6rem;margin:1.2rem 0;}
+.ps-title{font-family:var(--serif);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);opacity:.7;display:block;margin-bottom:1rem;}
+.ps-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.ps-item{display:flex;flex-direction:column;gap:.2rem;}
+.ps-item-lbl{font-family:var(--serif);font-size:.72rem;color:var(--ink-light);opacity:.7;}
+.ps-item-val{font-family:var(--serif);font-size:1.1rem;color:var(--teal);font-weight:400;}
+.ps-bar-wrap{grid-column:1/-1;margin-top:.4rem;}
+.ps-track{height:3px;background:rgba(74,144,138,.15);border-radius:2px;margin-top:.4rem;}
+.ps-fill{height:3px;background:var(--teal);border-radius:2px;transition:width .6s var(--ease);}
+
+/* QRGrid */
+.cn-qr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.8rem;margin:1rem 0;}
+.cn-qr-slot{border:1px dashed rgba(74,144,138,.25);padding:1.2rem .7rem;text-align:center;display:flex;flex-direction:column;align-items:center;gap:.5rem;background:rgba(74,144,138,.03);}
+.qr-box{width:60px;height:60px;border:1px solid rgba(74,144,138,.2);background:rgba(74,144,138,.05);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.55rem;color:var(--teal);opacity:.5;letter-spacing:.08em;text-align:center;line-height:1.4;}
+.qr-lbl{font-family:var(--serif);font-size:.65rem;color:var(--teal-dim);opacity:.7;letter-spacing:.06em;}
+.qr-desc{font-family:var(--serif);font-size:.65rem;color:var(--ink-faint);opacity:.55;font-style:italic;}
+
+/* Letter / Journal paper */
+.cn-letter{background:var(--paper-warm);border:1px solid rgba(192,149,83,.2);padding:2.5rem 3rem;position:relative;}
+.cn-letter::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--ochre) 0%,transparent 100%);opacity:.45;}
+
+/* Consult card */
+.cn-consult-card{border:1.5px solid rgba(74,144,138,.22);padding:1.8rem;margin:1.2rem 0;background:var(--paper-warm);position:relative;}
+.cn-consult-card::before{content:'¸2';position:absolute;top:-.6rem;right:1.2rem;font-size:.7rem;color:var(--teal-dim);opacity:.5;background:var(--paper-warm);padding:0 .2rem;}
+.cn-consult-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+.cz-lbl{font-family:var(--serif);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal-dim);opacity:.7;}
+
+/* Action button */
+.cn-btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--serif);font-size:.65rem;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);border:1px solid rgba(74,144,138,.3);padding:.78rem 1.7rem;background:transparent;cursor:pointer;transition:background .3s,border-color .3s;margin:.35rem .35rem 0 0;min-height:44px;}
+.cn-btn:hover,.cn-btn:focus{background:rgba(74,144,138,.08);border-color:var(--teal);outline:2px solid var(--teal);outline-offset:2px;}
+.cn-btn.reset{color:var(--ink-faint);border-color:rgba(122,112,104,.2);font-size:.58rem;}
+.cn-btn.reset:hover,.cn-btn.reset:focus{color:var(--brick);border-color:var(--brick);background:var(--brick-pale);}
+
+/* ════════════════════════════════════
+   ECOSYSTEM + CLOSING
+════════════════════════════════════ */
+.cn-ecosystem{padding:3.5rem;margin-bottom:2.5rem;border:1px solid rgba(74,144,138,.15);position:relative;opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease;}
+.cn-ecosystem.vis{opacity:1;transform:translateY(0);}
+.cn-ecosystem::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);opacity:.55;}
+.eco-title{font-family:var(--serif);font-weight:300;font-size:1.65rem;color:var(--paper);margin-bottom:.3rem;}
+.eco-sub{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--paper);opacity:.38;margin-bottom:1.6rem;line-height:1.65;}
+.eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1rem 0 1.4rem;}
+.eco-card{border:1px solid rgba(74,144,138,.15);padding:.95rem 1.1rem;transition:border-color .2s,background .2s;}
+.eco-card:hover{border-color:rgba(74,144,138,.35);background:rgba(74,144,138,.05);}
+.eco-card-t{font-family:var(--serif);font-size:.9rem;color:var(--paper);opacity:.75;display:block;margin-bottom:.22rem;}
+.eco-card-d{font-size:.76rem;color:var(--teal);font-style:italic;line-height:1.4;display:block;opacity:.68;}
+.cn-closing{min-height:70vh;display:flex;align-items:center;justify-content:center;padding:5rem 3rem;text-align:center;position:relative;overflow:hidden;opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+.cn-closing.vis{opacity:1;transform:translateY(0);}
+.cn-closing::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(74,144,138,.07),transparent 65%);}
+.closing-inner{max-width:520px;position:relative;}
+.closing-text{font-family:var(--serif);font-style:italic;font-size:clamp(1rem,2.5vw,1.3rem);color:var(--paper);line-height:2;opacity:.75;}
+.closing-text em{opacity:1;color:var(--teal);font-style:normal;}
+.closing-rule{width:40px;height:1px;background:var(--teal);opacity:.28;margin:2rem auto;}
+.closing-brand{font-family:var(--serif);font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);opacity:.5;}
+.closing-tagline{font-family:var(--serif);font-style:italic;font-size:.72rem;color:var(--paper);opacity:.25;margin-top:.6rem;letter-spacing:.06em;}
+.cn-colophon{text-align:center;padding:4rem 2rem 7rem;color:var(--paper);opacity:.3;}
+.cn-colophon p{font-family:var(--serif);font-size:.7rem;letter-spacing:.16em;line-height:2.1;}
+
+/* ════════════════════════════════════
+   FOCUS STATES (global)
+════════════════════════════════════ */
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+@media(max-width:600px){
+  .cn-card,.cn-ecosystem{padding:2.2rem 1.5rem 2rem;}
+  .cn-chapter{padding:4.5rem 1.6rem;min-height:88vh;}
+  .cn-chk-grid{grid-template-columns:1fr;gap:.3rem;}
+  .f-pair,.f-trio{grid-template-columns:1fr;}
+  .cn-consult-grid{grid-template-columns:1fr;}
+  .eco-grid{grid-template-columns:1fr;}
+  .cn-photo-grid{grid-template-columns:1fr 1fr;}
+  .cn-rating label{font-size:.78rem;padding:.5rem;min-height:44px;}
+  .nav-dots{display:none;}
+  #cn-nav{padding:.55rem 1rem;gap:.6rem;}
+  .nav-section{max-width:100px;font-size:.58rem;}
+  .cn-score-grid{grid-template-columns:1fr 1fr;}
+  .cn-month-grid{grid-template-columns:1fr;}
+  .ps-grid{grid-template-columns:1fr 1fr;}
+  .cn-milestone-row{gap:.5rem;}
+  .cn-milestone{min-width:80px;padding:.6rem .7rem;}
+  .cn-qr-grid{grid-template-columns:1fr 1fr;}
+  .cn-letter{padding:1.8rem 1.4rem;}
+  .cn-consult-card{padding:1.4rem;}
+}
+
+/* ════════════════════════════════════
+   PRINT
+════════════════════════════════════ */
+@media print{
+  *{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  body{background:white;}
+  body::after,#cn-splash,#cn-resume,#cn-nav,#cn-btt,.cn-fs-wrap,#cn-toast,#cn-prog,.cn-div,.cover-illus,.ch-illus{display:none!important;}
+  #cn-workbook{padding:0;perspective:none;}
+  .cn-cover{min-height:auto;break-after:page;padding:3rem 2rem;}
+  .cn-cover::before{background:linear-gradient(165deg,#14130f,#0c0b09);}
+  .cn-chapter{min-height:auto;break-after:page;padding:3rem 2rem;}
+  .cn-card,.cn-pull,.cn-ecosystem,.cn-closing{box-shadow:none;break-after:page;break-inside:avoid;margin-bottom:0;opacity:1!important;transform:none!important;}
+  .cn-card::after{opacity:.5;}
+  .cover-cta,.cn-btn,.card-tick{display:none!important;}
+  .cn-consult-card{break-inside:avoid;background:#f8f5ef!important;}
+  .cn-consult-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* Low-data / battery saving */
+@media (prefers-reduced-data: reduce) {
+  .ci-pulse,.ci-rot,.sp-mono { animation: none !important; }
+  .cn-card,.cn-pull,.cn-chapter,.cn-ecosystem,.cn-closing {
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+}
+</style>
+</head>
+<body>
+<!-- SplashScreen Component -->
+<div id="cn-splash" role="status" aria-label="Loading Hair Loss Companion Kit by Chiranjivi Notes">
+  <div class="sp-mono" aria-hidden="true">CN</div>
+  <p class="sp-brand">Chiranjivi Notes®</p>
+  <h1 class="sp-title">Hair Loss <em>Companion Kit</em></h1>
+  <p class="sp-meta">Version 2.0 · Edition 2026 · Clinical Companion Series</p>
+  <p class="sp-tag">Designed for patients. Built with evidence. Updated regularly.</p>
+  <div class="sp-track" role="progressbar" aria-label="Loading" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="sp-bar" id="sp-bar"></div>
+  </div>
+  <p class="sp-hint">Loading your companion…</p>
+</div>
+
+<!-- ResumeBanner Component -->
+<div id="cn-resume" role="alert" aria-live="polite">
+  <span class="rb-text">You have <em>saved progress</em> — continue from where you left off?</span>
+  <div class="rb-btns">
+    <button class="rb-btn primary" onclick="ResumeManager.resume()" aria-label="Continue from saved position">Continue</button>
+    <button class="rb-btn dismiss" onclick="ResumeManager.dismiss()" aria-label="Start from the beginning">Start from top</button>
+  </div>
+</div>
+
+<!-- ScrollProgressBar -->
+<div id="cn-prog" role="presentation" aria-hidden="true"></div>
+
+<!-- Toast -->
+<div id="cn-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<!-- BackToTop -->
+<button id="cn-btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polyline points="2,10 7,4 12,10"/></svg>
+</button>
+
+<!-- FontControls -->
+<div class="cn-fs-wrap" role="group" aria-label="Text size controls">
+  <button class="cn-fs-btn" onclick="FontController.increase()" aria-label="Increase text size">A+</button>
+  <button class="cn-fs-btn" onclick="FontController.decrease()" aria-label="Decrease text size">A−</button>
+</div>
+
+<!-- StickyNav -->
+<nav id="cn-nav" role="navigation" aria-label="Workbook navigation">
+  <span class="nav-brand" aria-hidden="true">Chiranjivi Notes</span>
+  <div class="nav-dots" id="nav-dots" aria-label="Chapter progress" role="list"></div>
+  <span class="nav-saved" id="nav-saved" aria-live="polite">Saved</span>
+  <span class="nav-section" id="nav-section" aria-label="Current section"></span>
+  <span class="nav-pct" id="nav-pct" aria-label="Completion percentage"></span>
+</nav>
+
+<!-- Workbook Container -->
+<main id="cn-workbook" role="main"></main>
+
+<!-- Colophon -->
+<footer class="cn-colophon" id="cn-colophon" style="display:none" role="contentinfo">
+  <div class="cover-mono" style="margin:0 auto 1.2rem;width:40px;height:40px;font-size:.8rem" aria-hidden="true">CN</div>
+  <p id="colophon-text"></p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   CHIRANJIVI NOTES® — WORKBOOK ENGINE v2.0
+   Hair Loss Companion Kit
+   Modules: AppState · StorageManager · AutoSave ·
+   ProgressTracker · MilestoneEngine · ObserverEngine ·
+   NavController · SplashController · ResumeManager ·
+   FontController · AppEvents · Components
+═══════════════════════════════════════════════════════ */
+
+/* ── AppState ─────────────────────────────────── */
+const AppState = {
+  version: '2.0',
+  dataKey: 'cn-hairloss-v1',
+  posKey:  'cn-hairloss-pos-v1',
+  fsKey:   'cn-hairloss-fs-v1',
+  data: {},
+  scrollPos: 0,
+  fontSize: 16,
+  firstInput: false,
+  totalCards: 0,
+  touchedCards: 0,
+};
+
+/* ── AppEvents (simple pub/sub) ───────────────── */
+const AppEvents = {
+  _h: {},
+  on(ev, fn) { (this._h[ev] = this._h[ev] || []).push(fn); },
+  emit(ev, data) { (this._h[ev] || []).forEach(fn => fn(data)); }
+};
+
+/* ── StorageManager ───────────────────────────── */
+const StorageManager = {
+  save(fields) {
+    try {
+      const payload = { version: AppState.version, saved: new Date().toISOString(), fields };
+      localStorage.setItem(AppState.dataKey, JSON.stringify(payload));
+      localStorage.setItem(AppState.posKey, String(Math.round(document.documentElement.scrollTop)));
+    } catch(e) { /* silent fail */ }
+  },
+  load() {
+    try {
+      const raw = localStorage.getItem(AppState.dataKey);
+      if (!raw) return null;
+      const payload = JSON.parse(raw);
+      return payload.fields || null;
+    } catch(e) { return null; }
+  },
+  getScrollPos() {
+    try { return parseInt(localStorage.getItem(AppState.posKey) || '0'); } catch(e) { return 0; }
+  },
+  saveFS(size) {
+    try { localStorage.setItem(AppState.fsKey, String(size)); } catch(e) {}
+  },
+  getFS() {
+    try { return parseInt(localStorage.getItem(AppState.fsKey) || '16'); } catch(e) { return 16; }
+  },
+  clear() {
+    try { localStorage.removeItem(AppState.dataKey); localStorage.removeItem(AppState.posKey); } catch(e) {}
+  }
+};
+
+/* ── AutoSave (debounced 400ms) ───────────────── */
+const AutoSave = {
+  _timer: null,
+  schedule() {
+    clearTimeout(this._timer);
+    this._timer = setTimeout(() => this._run(), 400);
+  },
+  _run() {
+    const fields = {};
+    document.querySelectorAll('[data-key]').forEach(el => {
+      if (el.type === 'checkbox') fields[el.dataset.key] = el.checked;
+      else if (el.type === 'radio') { if (el.checked) fields[el.dataset.key] = el.value; }
+      else fields[el.dataset.key] = el.value;
+    });
+    AppState.data = fields;
+    StorageManager.save(fields);
+    NavController.showSaved();
+    AppEvents.emit('saved');
+  },
+  loadAll() {
+    const fields = StorageManager.load();
+    if (!fields) return;
+    Object.entries(fields).forEach(([k, v]) => {
+      document.querySelectorAll(`[data-key="${k}"]`).forEach(el => {
+        if (el.type === 'checkbox') el.checked = !!v;
+        else if (el.type === 'radio') { if (el.value === String(v)) el.checked = true; }
+        else el.value = v;
+      });
+    });
+    AppEvents.emit('loaded');
+  }
+};
+
+/* ── ProgressTracker ──────────────────────────── */
+const ProgressTracker = {
+  update() {
+    let touched = 0, total = 0;
+    document.querySelectorAll('.cn-card').forEach(card => {
+      total++;
+      let t = false;
+      card.querySelectorAll('[data-key]').forEach(el => {
+        if (t) return;
+        if (el.type === 'checkbox' || el.type === 'radio') { if (el.checked) t = true; }
+        else if (el.value && el.value.trim()) t = true;
+      });
+      card.classList.toggle('touched', t);
+      if (t) touched++;
+    });
+    AppState.totalCards = total;
+    AppState.touchedCards = touched;
+    const pct = total > 0 ? Math.round((touched / total) * 100) : 0;
+
+    // Update nav
+    const navPct = document.getElementById('nav-pct');
+    if (navPct) navPct.textContent = pct + '% complete';
+
+    // Update progress card
+    const psEng = document.getElementById('ps-engaged');
+    if (psEng) psEng.textContent = `${touched} of ${total}`;
+    const psPct = document.getElementById('ps-pct');
+    if (psPct) psPct.textContent = pct + '%';
+    const psFill = document.getElementById('ps-fill');
+    if (psFill) psFill.style.width = pct + '%';
+
+    // Medication / consult status
+    const medEl = document.querySelector('[data-key="med-dose-0"]');
+    const psMeds = document.getElementById('ps-meds');
+    if (psMeds && medEl) psMeds.textContent = (medEl.value && medEl.value.trim()) ? 'Recorded \u2713' : 'Pending';
+    const csEl = document.querySelector('[data-key="cs-diag"]');
+    const psCons = document.getElementById('ps-consult');
+    if (psCons && csEl) psCons.textContent = (csEl.value && csEl.value.trim()) ? 'Completed \u2713' : 'Pending';
+
+    MilestoneEngine.check();
+    AppEvents.emit('progress', { touched, total, pct });
+  }
+};
+
+/* ── MilestoneEngine ──────────────────────────── */
+const MilestoneEngine = {
+  milestones: [
+    { id: 'ms-started',  watchKey: 'snap-name',       label: 'Journey Begun' },
+    { id: 'ms-month1',   watchKey: 'shed-shedding-0', label: 'Month 1 Tracked' },
+    { id: 'ms-month3',   watchKey: 'shed-shedding-2', label: '3 Months Consistent' },
+    { id: 'ms-month6',   watchKey: 'shed-shedding-5', label: '6 Months Consistent' },
+    { id: 'ms-meds',     watchKey: 'med-dose-0',      label: 'Treatment Logged' },
+    { id: 'ms-consult',  watchKey: 'cs-diag',         label: 'Consultation Recorded' },
+  ],
+  check() {
+    this.milestones.forEach(({ id, watchKey }) => {
+      const badge = document.getElementById(id);
+      if (!badge) return;
+      const els = document.querySelectorAll(`[data-key="${watchKey}"]`);
+      let earned = false;
+      els.forEach(el => {
+        if (el.type === 'radio' || el.type === 'checkbox') { if (el.checked) earned = true; }
+        else if (el.value && el.value.trim()) earned = true;
+      });
+      badge.classList.toggle('earned', earned);
+      badge.setAttribute('aria-label', badge.querySelector('.ms-lbl')?.textContent + (earned ? ', earned' : ', not yet earned'));
+    });
+  }
+};
+
+/* ── ObserverEngine ───────────────────────────── */
+const ObserverEngine = {
+  init() {
+    const fadeEls = document.querySelectorAll('.cn-card,.cn-pull,.cn-chapter,.cn-ecosystem,.cn-closing,.cn-div');
+    const fadeObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); fadeObs.unobserve(e.target); } });
+    }, { threshold: 0.04 });
+
+    const sectionObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          NavController.show();
+          const n = parseInt(e.target.dataset.pgn) || 0;
+          NavController.updateDots(Math.ceil(n / 10));
+          const sec = e.target.dataset.section || e.target.querySelector('.ch-kicker,.card-kicker')?.textContent || '';
+          NavController.setSection(sec);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '-5% 0px -45% 0px' });
+
+    fadeEls.forEach(el => { fadeObs.observe(el); sectionObs.observe(el); });
+
+    const coverObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting && e.intersectionRatio > 0.35) NavController.hide(); });
+    }, { threshold: 0.35 });
+    const cover = document.querySelector('.cn-cover');
+    if (cover) coverObs.observe(cover);
+  }
+};
+
+/* ── NavController ────────────────────────────── */
+const NavController = {
+  _saveTimer: null,
+  show() { document.getElementById('cn-nav')?.classList.add('show'); },
+  hide() { document.getElementById('cn-nav')?.classList.remove('show'); },
+  showSaved() {
+    const el = document.getElementById('nav-saved');
+    if (!el) return;
+    el.classList.add('show');
+    clearTimeout(this._saveTimer);
+    this._saveTimer = setTimeout(() => el.classList.remove('show'), 2000);
+  },
+  setSection(text) {
+    const el = document.getElementById('nav-section');
+    if (el) el.textContent = text;
+  },
+  updateDots(n) {
+    document.querySelectorAll('.nav-dot').forEach(d => {
+      const dn = parseInt(d.dataset.n);
+      d.className = 'nav-dot' + (dn < n ? ' done' : dn === n ? ' active' : '');
+    });
+  },
+  buildDots(count) {
+    const el = document.getElementById('nav-dots');
+    if (!el) return;
+    el.innerHTML = Array.from({ length: count }, (_, i) =>
+      `<div class="nav-dot" data-n="${i+1}" role="listitem" aria-label="Part ${i+1}"></div>`
+    ).join('');
+  }
+};
+
+/* ── SplashController ─────────────────────────── */
+const SplashController = {
+  init() {
+    const bar = document.getElementById('sp-bar');
+    if (bar) {
+      const prog = bar.closest('[role="progressbar"]');
+      setTimeout(() => {
+        bar.style.width = '100%';
+        if (prog) prog.setAttribute('aria-valuenow', '100');
+      }, 80);
+    }
+    setTimeout(() => {
+      WorkbookRenderer.render();
+      const splash = document.getElementById('cn-splash');
+      if (splash) setTimeout(() => splash.classList.add('hide'), 200);
+      setTimeout(() => ResumeManager.check(), 600);
+    }, 3000);
+  }
+};
+
+/* ── ResumeManager ────────────────────────────── */
+const ResumeManager = {
+  check() {
+    const pos = StorageManager.getScrollPos();
+    const hasData = !!localStorage.getItem(AppState.dataKey);
+    if (pos > 300 && hasData) {
+      document.getElementById('cn-resume')?.classList.add('show');
+    }
+  },
+  resume() {
+    const pos = StorageManager.getScrollPos();
+    window.scrollTo({ top: pos, behavior: 'smooth' });
+    this.dismiss();
+  },
+  dismiss() {
+    document.getElementById('cn-resume')?.classList.remove('show');
+  }
+};
+
+/* ── FontController ───────────────────────────── */
+const FontController = {
+  size: 16,
+  init() {
+    this.size = StorageManager.getFS();
+    document.documentElement.style.fontSize = this.size + 'px';
+  },
+  increase() { this._set(Math.min(20, this.size + 1)); },
+  decrease() { this._set(Math.max(14, this.size - 1)); },
+  _set(s) {
+    this.size = s;
+    document.documentElement.style.fontSize = s + 'px';
+    StorageManager.saveFS(s);
+    Toast.show(s >= 20 ? 'Maximum text size' : s <= 14 ? 'Minimum text size' : 'Text size adjusted');
+  }
+};
+
+/* ── Toast ────────────────────────────────────── */
+const Toast = {
+  _t: null,
+  show(msg, dur = 2200) {
+    const el = document.getElementById('cn-toast');
+    if (!el) return;
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(this._t);
+    this._t = setTimeout(() => el.classList.remove('show'), dur);
+  }
+};
+
+/* ── Event listeners ──────────────────────────── */
+document.addEventListener('input', e => {
+  if (!AppState.firstInput) {
+    AppState.firstInput = true;
+    setTimeout(() => Toast.show('Your responses are saved automatically to this device', 3500), 400);
+  }
+  AutoSave.schedule();
+});
+document.addEventListener('change', () => AutoSave.schedule());
+
+window.addEventListener('scroll', () => {
+  const st = document.documentElement.scrollTop;
+  const sh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const prog = document.getElementById('cn-prog');
+  if (prog) prog.style.width = (sh > 0 ? (st / sh) * 100 : 0) + '%';
+  const btt = document.getElementById('cn-btt');
+  if (btt) { if (st > 300) btt.classList.add('show'); else btt.classList.remove('show'); }
+  try { localStorage.setItem(AppState.posKey, String(Math.round(st))); } catch(e) {}
+}, { passive: true });
+
+AppEvents.on('saved', () => ProgressTracker.update());
+AppEvents.on('loaded', () => ProgressTracker.update());
+
+/* ═══════════════════════════════════════════════
+   COMPONENT BUILDERS
+═══════════════════════════════════════════════ */
+
+/* Cover SVG illustration */
+function buildCoverSVG() {
+  const cx=320,cy=320;
+  let rays='',strands='';
+  for(let i=0;i<24;i++){const a=(i/24)*Math.PI*2;const x1=cx+Math.cos(a)*48,y1=cy+Math.sin(a)*48,x2=cx+Math.cos(a)*140,y2=cy+Math.sin(a)*140;rays+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#4a908a" stroke-width="0.5" opacity="0.18"/>`;}
+  for(let i=0;i<6;i++){const a=(i/6)*Math.PI*2;const sx=cx+Math.cos(a)*30,sy=cy+Math.sin(a)*30,ex=cx+Math.cos(a+0.5)*200,ey=cy+Math.sin(a+0.5)*200,cpx=cx+Math.cos(a+0.25)*120,cpy=cy+Math.sin(a+0.25)*120;strands+=`<path d="M${sx.toFixed(1)},${sy.toFixed(1)} Q${cpx.toFixed(1)},${cpy.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}" fill="none" stroke="#4a908a" stroke-width="0.8" opacity="0.22"/>`;}
+  return `<div class="cover-illus" aria-hidden="true"><svg viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="cg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a908a" stop-opacity="0.1"/><stop offset="100%" stop-color="#4a908a" stop-opacity="0"/></radialGradient></defs><g class="ci-rot"><circle cx="${cx}" cy="${cy}" r="290" fill="none" stroke="#4a908a" stroke-width="0.4" stroke-dasharray="2 14" opacity="0.18"/><circle cx="${cx}" cy="${cy}" r="240" fill="none" stroke="#c09553" stroke-width="0.5" stroke-dasharray="1 9" opacity="0.15"/></g><g class="ci-pulse"><circle cx="${cx}" cy="${cy}" r="200" fill="none" stroke="#4a908a" stroke-width="0.5" opacity="0.13"/><circle cx="${cx}" cy="${cy}" r="155" fill="none" stroke="#7a9e8a" stroke-width="0.5" opacity="0.15"/><circle cx="${cx}" cy="${cy}" r="108" fill="none" stroke="#4a908a" stroke-width="0.6" opacity="0.2"/>${rays}${strands}<circle cx="${cx}" cy="${cy}" r="100" fill="url(#cg)"/><circle cx="${cx}" cy="${cy}" r="48" fill="none" stroke="#4a908a" stroke-width="0.7" opacity="0.38"/><circle cx="${cx}" cy="${cy}" r="3" fill="#4a908a" opacity="0.5"/></g></svg></div>`;
+}
+function buildChapterSVG(accent) {
+  return `<div class="ch-illus" aria-hidden="true"><svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg"><circle cx="230" cy="230" r="200" fill="none" stroke="${accent}" stroke-width="0.6" stroke-dasharray="3 12" opacity="0.3"/><circle cx="230" cy="230" r="160" fill="none" stroke="${accent}" stroke-width="0.5" opacity="0.18"/><circle cx="230" cy="230" r="120" fill="none" stroke="${accent}" stroke-width="0.5" stroke-dasharray="1 6" opacity="0.22"/><circle cx="230" cy="230" r="60" fill="none" stroke="${accent}" stroke-width="0.7" opacity="0.25"/><circle cx="230" cy="230" r="4" fill="${accent}" opacity="0.4"/></svg></div>`;
+}
+
+/* Structural builders */
+function CoverPage({title,accentWord,subtitle,epigraph}) {
+  return `<section class="cn-cover" id="cn-cover">
+  ${buildCoverSVG()}
+  <div class="cover-inner">
+    <div class="cover-mono" aria-hidden="true">CN</div>
+    <p class="cover-kicker">Chiranjivi Notes\u00ae</p>
+    <h1 class="cover-h1">${title} <em>${accentWord}</em></h1>
+    <p class="cover-sub">${subtitle}</p>
+    <div class="cover-rule" aria-hidden="true"></div>
+    <p class="cover-epigraph">${epigraph}</p>
+    <button class="cover-cta" onclick="document.querySelector('.cn-chapter').scrollIntoView({behavior:'smooth'})" aria-label="Begin reading the workbook">Begin Your Journey \u2193</button>
+  </div>
+</section>`;
+}
+
+function ChapterHeader({part,title,description,accent,icon,pgn}) {
+  return `<section class="cn-chapter" data-pgn="${pgn}" data-section="${part}" style="--co:${accent}" aria-label="${part}: ${title}">
+  ${buildChapterSVG(accent)}
+  <div class="ch-inner">
+    <span class="ch-icon" aria-hidden="true">${icon}</span>
+    <span class="ch-kicker">${part}</span>
+    <h2 class="ch-title">${title}</h2>
+    <p class="ch-desc">${description}</p>
+    <div class="ch-rule" aria-hidden="true"></div>
+  </div>
+</section>`;
+}
+
+function SectionDivider() {
+  return `<div class="cn-div" aria-hidden="true"><svg width="180" height="24" viewBox="0 0 180 24" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="12" x2="72" y2="12" stroke="#4a908a" stroke-width="0.6" opacity="0.3"/><circle cx="90" cy="12" r="3" fill="none" stroke="#4a908a" stroke-width="0.8" opacity="0.4"/><circle cx="90" cy="12" r="6" fill="none" stroke="#4a908a" stroke-width="0.4" opacity="0.2"/><line x1="108" y1="12" x2="180" y2="12" stroke="#4a908a" stroke-width="0.6" opacity="0.3"/></svg></div>`;
+}
+
+function PullQuote({text,variant,pgn}) {
+  return `<div class="cn-pull ${variant||'dark'}" data-pgn="${pgn||98}" aria-label="Reflection: ${text}">
+  <div class="pull-inner">
+    <span class="pull-qm" aria-hidden="true">\u201c</span>
+    <span class="pull-diamonds" aria-hidden="true">\u25c6 \u25c6 \u25c6</span>
+    <p class="pull-text">${text}</p>
+  </div>
+</div>`;
+}
+
+function MythCard({myth,fact}) {
+  return BaseCard({
+    id:'myth-'+(Math.random().toString(36).slice(2,7)),
+    pgn:98, section:'Myth of the Month', badge:'Between Chapters',
+    accent:'ochre', title:'Myth of the Month', sub:null, closer:null,
+    body:`<div class="cn-pearl"><span class="pearl-lbl">Common Myth</span><p class="pearl-body">\u201c${myth}\u201d</p></div>
+<div class="cn-evidence" style="margin-top:.8rem"><span class="ev-lbl">What the Evidence Says</span><p class="note-body">${fact}</p></div>`
+  });
+}
+
+/* BaseCard — all content cards derive from this */
+function BaseCard({id,pgn,section,badge,accent,title,sub,body,closer,variant}) {
+  const accClass = accent ? `acc-${accent}` : '';
+  const varClass = variant || '';
+  const kickerClass = accent && ['ochre','sage','slate','brick'].includes(accent) ? accent : '';
+  const ruleClass = kickerClass;
+  return `<article class="cn-card ${accClass} ${varClass}" id="${id}" data-pgn="${pgn||1}" data-section="${section||''}" aria-label="${title}">
+  <span class="card-tick" aria-hidden="true">\u2713</span>
+  ${badge ? `<span class="card-badge" aria-label="Badge: ${badge}">${badge}</span>` : ''}
+  ${section ? `<span class="card-kicker ${kickerClass}">${section}</span>` : ''}
+  <h2 class="card-title">${title}</h2>
+  ${sub ? `<p class="card-sub">${sub}</p>` : ''}
+  <hr class="card-rule ${ruleClass}" aria-hidden="true">
+  ${body}
+  ${closer ? `<p class="card-closer">${closer}</p>` : ''}
+</article>`;
+}
+
+/* Checklist component */
+function Checklist({items,cols,prefix,labelId}) {
+  const gridClass = cols===1?'col1':cols===3?'col3':'';
+  const html = items.map((item,i)=>`<label class="cn-chk" aria-labelledby="${prefix}-lbl-${i}">
+    <input type="checkbox" data-key="${prefix}-${i}" aria-label="${typeof item==='string'?item:item.label}">
+    <span class="cn-chk-lbl" id="${prefix}-lbl-${i}">${typeof item==='string'?item:item.label}</span>
+  </label>`).join('');
+  return `<div class="cn-chk-grid ${gridClass}" role="group" ${labelId?`aria-labelledby="${labelId}"`:''}>${html}</div>`;
+}
+
+/* Action checklist (strikethrough) */
+function ActionChecklist({items,prefix}) {
+  return `<ul class="cn-action-list" role="list">${items.map((item,i)=>
+    `<li class="cn-action-item"><input type="checkbox" id="${prefix}-${i}" data-key="${prefix}-${i}" aria-label="${item}"><label for="${prefix}-${i}" class="cn-action-text">${item}</label></li>`
+  ).join('')}</ul>`;
+}
+
+/* RatingSelector */
+function RatingSelector({name,dataKey,options,legend}) {
+  const id = name.replace(/[^a-z0-9]/gi,'');
+  return `<fieldset style="border:none;padding:0"><legend class="f-label">${legend||''}</legend><div class="cn-rating" role="group">${options.map((opt,i)=>
+    `<input type="radio" name="${name}" id="${id}-${i}" data-key="${dataKey}" value="${opt.value||opt}"><label for="${id}-${i}">${opt.label||opt}</label>`
+  ).join('')}</div></fieldset>`;
+}
+
+/* MonthGrid */
+function MonthGrid({prefix,months}) {
+  const ms = months || ['Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'];
+  return `<div class="cn-month-grid">${ms.map((m,i)=>`
+<div class="cn-month-card">
+  <span class="mc-lbl">${m}</span>
+  ${RatingSelector({name:`${prefix}-s-${i}`,dataKey:`${prefix}-shedding-${i}`,legend:'Shedding level',options:[{label:'Much less',value:'much-less'},{label:'Usual',value:'usual'},{label:'Slightly more',value:'slightly-more'},{label:'Much more',value:'much-more'}]})}
+  <label class="f-label" for="${prefix}-note-${i}">Notes</label>
+  <textarea class="f-area" id="${prefix}-note-${i}" data-key="${prefix}-note-${i}" placeholder="Notes\u2026" style="min-height:2.5rem;margin-top:.3rem" aria-label="${m} notes"></textarea>
+</div>`).join('')}</div>`;
+}
+
+/* Reflection MonthGrid (with 3 score cards) */
+function ReflectionMonthGrid({prefix}) {
+  const ms = ['Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'];
+  return `<div class="cn-month-grid">${ms.map((m,i)=>`
+<div class="cn-month-card">
+  <span class="mc-lbl">${m}</span>
+  <div class="f-group"><label class="f-label" for="${prefix}-imp-${i}">Biggest improvement</label><textarea class="f-area" id="${prefix}-imp-${i}" data-key="${prefix}-imp-${i}" placeholder="\u2026" style="min-height:2.5rem"></textarea></div>
+  <div class="f-group"><label class="f-label" for="${prefix}-chal-${i}">Biggest challenge</label><textarea class="f-area" id="${prefix}-chal-${i}" data-key="${prefix}-chal-${i}" placeholder="\u2026" style="min-height:2.5rem"></textarea></div>
+  <div class="cn-score-grid" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="cn-score-card"><span class="sc-lbl">Confidence</span><input class="sc-input" type="number" min="0" max="10" id="${prefix}-conf-${i}" data-key="${prefix}-conf-${i}" aria-label="Confidence 0-10" placeholder="0"><span class="sc-max">/10</span></div>
+    <div class="cn-score-card"><span class="sc-lbl">Anxiety</span><input class="sc-input" type="number" min="0" max="10" id="${prefix}-anx-${i}" data-key="${prefix}-anx-${i}" aria-label="Anxiety 0-10" placeholder="0"><span class="sc-max">/10</span></div>
+    <div class="cn-score-card"><span class="sc-lbl">Appearance</span><input class="sc-input" type="number" min="0" max="10" id="${prefix}-app-${i}" data-key="${prefix}-app-${i}" aria-label="Appearance satisfaction 0-10" placeholder="0"><span class="sc-max">/10</span></div>
+  </div>
+  <div class="f-group" style="margin-top:.5rem"><label class="f-label" for="${prefix}-goal-${i}">Next month\u2019s goal</label><textarea class="f-area" id="${prefix}-goal-${i}" data-key="${prefix}-goal-${i}" placeholder="\u2026" style="min-height:2.5rem"></textarea></div>
+</div>`).join('')}</div>`;
+}
+
+/* DataTable */
+function DataTable({cols,rows,prefix,scrollable}) {
+  const wrap = scrollable!==false ? 'style="overflow-x:auto"' : '';
+  return `<div ${wrap}><table class="cn-table"><thead><tr>${cols.map(c=>`<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${rows.map((row,ri)=>`<tr>${row.map((cell,ci)=>`<td>${typeof cell==='string'?`<span style="font-size:.82rem;color:var(--ink-light)">${cell}</span>`:cell(ri,ci,prefix)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+
+function tableInput(key,placeholder,type) {
+  return (ri,ci,prefix)=>`<input data-key="${prefix}-${key}-${ri}" placeholder="${placeholder||'\u2014'}" ${type?`type="${type}"`:''}  aria-label="${placeholder||'value'} row ${ri+1}" style="${type==='date'?'min-width:120px':''}">`;
+}
+function tableTextarea(key,placeholder) {
+  return (ri,ci,prefix)=>`<textarea data-key="${prefix}-${key}-${ri}" placeholder="${placeholder||'\u2026'}" style="min-height:2rem" aria-label="${placeholder||'notes'} row ${ri+1}"></textarea>`;
+}
+
+/* MilestoneRow */
+function MilestoneRow({milestones}) {
+  return `<div class="cn-milestone-row" role="list" aria-label="Achievement milestones">${milestones.map(m=>
+    `<div class="cn-milestone" id="${m.id}" role="listitem" aria-label="${m.label}, not yet earned"><span class="ms-icon" aria-hidden="true">${m.icon}</span><span class="ms-lbl">${m.label}</span></div>`
+  ).join('')}</div>`;
+}
+
+/* ProgressSummary */
+function ProgressSummary() {
+  return `<div class="cn-prog-summary" role="region" aria-label="Workbook progress">
+  <span class="ps-title">Workbook Completion</span>
+  <div class="ps-grid">
+    <div class="ps-item"><span class="ps-item-lbl">Pages engaged</span><span class="ps-item-val" id="ps-engaged" aria-live="polite">0</span></div>
+    <div class="ps-item"><span class="ps-item-lbl">Completion</span><span class="ps-item-val" id="ps-pct" aria-live="polite">0%</span></div>
+    <div class="ps-item"><span class="ps-item-lbl">Medication log</span><span class="ps-item-val" id="ps-meds" aria-live="polite">Pending</span></div>
+    <div class="ps-item"><span class="ps-item-lbl">Consultation summary</span><span class="ps-item-val" id="ps-consult" aria-live="polite">Pending</span></div>
+    <div class="ps-bar-wrap"><span class="ps-item-lbl">Overall progress</span><div class="ps-track" role="progressbar" aria-label="Overall completion" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="ps-fill" id="ps-fill" style="width:0%"></div></div></div>
+  </div>
+</div>`;
+}
+
+/* QRGrid */
+function QRGrid({slots}) {
+  return `<div class="cn-qr-grid">${slots.map(s=>`<div class="cn-qr-slot"><div class="qr-box" aria-hidden="true">QR<br>Coming<br>Soon</div><span class="qr-lbl">${s.label}</span><span class="qr-desc">${s.desc}</span></div>`).join('')}</div>`;
+}
+
+/* Ecosystem page */
+function EcosystemPage({cards}) {
+  return `<section class="cn-ecosystem" data-pgn="99" aria-label="Chiranjivi Notes companion series">
+  <span class="card-kicker" style="color:rgba(74,144,138,.5)">Part of the Chiranjivi Notes Library</span>
+  <h2 class="eco-title">Continue Your Journey</h2>
+  <p class="eco-sub">This companion was a beginning \u2014 a way of seeing your situation with greater clarity and confidence.<br><em style="opacity:.55;font-size:.85rem">Clarity \u00b7 Compassion \u00b7 Evidence</em></p>
+  <div style="display:inline-flex;align-items:center;gap:.45rem;background:rgba(74,144,138,.09);border:1px solid rgba(74,144,138,.22);padding:.4rem .9rem;margin-bottom:1.3rem;font-family:var(--serif);font-size:.68rem;letter-spacing:.13em;color:var(--teal)">\u2713 Hair Loss Companion Kit \u2014 Version 2.0 \u00b7 2026</div>
+  <hr class="card-rule" aria-hidden="true">
+  <div class="eco-grid">${cards.map(c=>`<div class="eco-card"><span class="eco-card-t">${c.title}</span><span class="eco-card-d">${c.desc}</span></div>`).join('')}</div>
+  <div style="margin-top:1rem"><button class="cn-btn reset" onclick="confirmReset()">Clear all responses</button></div>
+</section>`;
+}
+
+function ClosingPage() {
+  return `<section class="cn-closing" data-pgn="100" aria-label="Closing reflection">
+  <div class="closing-inner">
+    <div class="cover-mono" style="margin:0 auto 2.5rem;opacity:.6;width:48px;height:48px;font-size:.9rem" aria-hidden="true">CN</div>
+    <p class="closing-text">Hair loss is a <em>medical condition</em> \u2014 not a personal failure.</p>
+    <p class="closing-text" style="margin-top:.5rem">Stay curious rather than fearful, consistent rather than impatient, and partner with your healthcare professional for decisions about diagnosis and treatment.</p>
+    <p class="closing-text" style="margin-top:.5rem">Small, <em>steady steps</em> often lead to meaningful progress.</p>
+    <div class="closing-rule" aria-hidden="true"></div>
+    <span class="closing-brand">Chiranjivi Notes\u00ae</span>
+    <p class="closing-tagline">Clarity \u00b7 Compassion \u00b7 Evidence</p>
+  </div>
+</section>`;
+}
+
+/* ═══════════════════════════════════════════════
+   WORKBOOK RENDERER — Hair Loss Companion Kit
+═══════════════════════════════════════════════ */
+const WorkbookRenderer = {
+  render() {
+    const wb = document.getElementById('cn-workbook');
+    if (!wb) return;
+
+    const pages = this.buildPages();
+    wb.innerHTML = pages.join('');
+
+    NavController.buildDots(6);
+
+    // Colophon
+    const col = document.getElementById('cn-colophon');
+    const ct = document.getElementById('colophon-text');
+    if (col && ct) {
+      col.style.display = 'block';
+      ct.innerHTML = 'Chiranjivi Notes\u00ae \u00b7 Hair Loss Companion Kit \u00b7 Version 2.0 \u00b7 Edition 2026<br>Clarity \u00b7 Compassion \u00b7 Evidence<br><br>This companion is for educational and organisational purposes only. It does not replace professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional.<br><br>\u00a9 2026 Chiranjivi Notes\u00ae \u00b7 All Rights Reserved \u00b7 For personal use only.';
+    }
+
+    AutoSave.loadAll();
+    ObserverEngine.init();
+    ProgressTracker.update();
+  },
+
+  D: SectionDivider,
+
+  buildPages() {
+    const D = SectionDivider;
+    const pages = [];
+
+    // Cover
+    pages.push(CoverPage({
+      title: 'Hair Loss',
+      accentWord: 'Companion Kit',
+      subtitle: 'An evidence-based patient companion for tracking, understanding, and navigating hair loss with confidence.',
+      epigraph: 'Clarity is the first treatment.'
+    }));
+
+    // ══ PART ONE ══════════════════════════════════
+    pages.push(ChapterHeader({part:'Part One',title:'My Hair Journey',description:'Understanding what brought you here \u2014 your story, your timeline, your pattern.',accent:'#4a908a',icon:'\u25ef',pgn:1}));
+    pages.push(D());
+
+    // Safety Alert
+    pages.push(BaseCard({id:'p-safety',pgn:1,section:'Safety Notice',badge:'Read First',accent:'brick',title:'Before You Begin \u2014 Safety Notice',sub:null,closer:null,
+      body:`<div class="cn-safety"><span class="sa-lbl">Seek Prompt Medical Attention If You Have</span><p class="note-body">Sudden painful hair loss \u00b7 Scalp swelling or pus \u00b7 High fever with hair loss \u00b7 Rapidly spreading bald patches \u00b7 Burning or severe scalp pain</p><p class="note-body" style="margin-top:.7rem">If any of these apply, please consult a qualified healthcare professional <strong>before</strong> using this workbook. This companion is educational and organisational \u2014 not a substitute for medical assessment.</p></div><div class="cn-reassure" style="margin-top:1rem"><p>If your symptoms are gradual or non-urgent, this companion is designed to help you. Continue when ready.</p></div>`
+    }));
+    pages.push(D());
+
+    // Welcome
+    pages.push(BaseCard({id:'p-welcome',pgn:2,section:'Introduction',badge:'Welcome',accent:'',title:'A Few Words Before You Begin',sub:'Hair loss can feel frightening, frustrating, and deeply personal.',closer:'This companion is educational and organisational. It does not replace medical diagnosis or professional treatment.',
+      body:`<p class="cn-body">Yet many forms of hair loss are treatable, manageable, or temporary. This Companion Kit is designed to help you move from anxiety to understanding \u2014 one page at a time.</p>
+<ol class="cn-ol"><li>Understand your condition without panic</li><li>Track meaningful changes instead of daily fluctuations</li><li>Organise information for doctor visits</li><li>Avoid misinformation and miracle claims</li><li>Stay consistent with evidence-based care</li></ol>
+<div class="cn-reassure"><p>Scalp hair grows on average about 1\u2009cm per month, although individual rates vary. Progress is measured in months \u2014 not days.</p></div>
+<div class="cn-callout"><span class="cl-lbl">How to Use This Companion</span><p class="cl-body">Work through in order, or return to any section you need. Your responses are saved automatically to this device \u2014 no account or internet connection required.</p></div>`
+    }));
+    pages.push(D());
+
+    // Progress Dashboard
+    pages.push(BaseCard({id:'p-progress-dash',pgn:3,section:'Introduction',badge:'Your Progress',accent:'',title:'Your Workbook Progress',sub:'A live overview of your journey through this companion.',closer:null,
+      body:`${ProgressSummary()}
+<h3 class="cn-sub" style="margin-top:1.4rem">Milestones</h3>
+${MilestoneRow({milestones:[
+  {id:'ms-started',icon:'\u25ce',label:'Journey\nBegun'},
+  {id:'ms-month1',icon:'\u25c7',label:'Month 1\nTracked'},
+  {id:'ms-month3',icon:'\u25c8',label:'3 Months\nConsistent'},
+  {id:'ms-month6',icon:'\u25c9',label:'6 Months\nConsistent'},
+  {id:'ms-meds',icon:'\u2295',label:'Treatment\nLogged'},
+  {id:'ms-consult',icon:'\u25a1',label:'Consultation\nRecorded'},
+]})}`
+    }));
+    pages.push(D());
+
+    // Snapshot
+    pages.push(BaseCard({id:'p-snapshot',pgn:4,section:'My Hair Journey',badge:'Section 1',accent:'',title:'My Hair Journey Snapshot',sub:'A brief record of who you are and what brought you here.',closer:null,
+      body:`<div class="f-pair">
+<div class="f-group"><label class="f-label" for="snap-name">Name (optional)</label><input class="f-input" id="snap-name" data-key="snap-name" placeholder="Your name" autocomplete="name"></div>
+<div class="f-group"><label class="f-label" for="snap-age">Age</label><input class="f-input" id="snap-age" type="number" data-key="snap-age" placeholder="Years" min="1" max="120"></div>
+</div>
+<div class="f-pair">
+<div class="f-group"><label class="f-label" for="snap-sex">Sex</label><select class="f-select" id="snap-sex" data-key="snap-sex"><option value="">Select\u2026</option><option>Male</option><option>Female</option><option>Other / prefer not to say</option></select></div>
+<div class="f-group"><label class="f-label" for="snap-occ">Occupation</label><input class="f-input" id="snap-occ" data-key="snap-occ" placeholder="Optional"></div>
+</div>
+<div class="f-pair">
+<div class="f-group"><label class="f-label" for="snap-date">Date symptoms first noticed</label><input class="f-input" id="snap-date" type="date" data-key="snap-date"></div>
+<div class="f-group"><label class="f-label" for="snap-diet">Dietary pattern</label><input class="f-input" id="snap-diet" data-key="snap-diet" placeholder="e.g. vegetarian, omnivore\u2026"></div>
+</div>
+<div class="f-group"><label class="f-label" for="snap-concern">Main concern in your own words</label><textarea class="f-area" id="snap-concern" data-key="snap-concern" placeholder="What worries you most?"></textarea></div>
+<div class="f-pair">
+<div class="f-group"><label class="f-label" for="snap-fam">Family history of hair loss</label><textarea class="f-area" id="snap-fam" data-key="snap-fam" placeholder="Who, what pattern, what age\u2026" style="min-height:3rem"></textarea></div>
+<div class="f-group"><label class="f-label" for="snap-med">Existing medical conditions</label><textarea class="f-area" id="snap-med" data-key="snap-med" placeholder="Diagnosed conditions\u2026" style="min-height:3rem"></textarea></div>
+</div>
+<div class="f-group"><label class="f-label" for="snap-meds">Current medications (including supplements)</label><textarea class="f-area" id="snap-meds" data-key="snap-meds" placeholder="List medications and doses\u2026"></textarea></div>
+<div class="f-group"><label class="f-label" for="snap-notes">Other notes</label><textarea class="f-area lg" id="snap-notes" data-key="snap-notes" placeholder="Anything else worth recording\u2026"></textarea></div>`
+    }));
+    pages.push(D());
+
+    // Hair Timeline
+    pages.push(BaseCard({id:'p-timeline',pgn:5,section:'My Hair Journey',badge:'Section 2',accent:'ochre',title:'My Hair Timeline',sub:'Document important events during the months before your hair loss began.',closer:null,
+      body:`<div class="cn-note"><span class="note-lbl">Educational Note</span><p class="note-body">Hair shedding related to telogen effluvium commonly begins around two to four months after a trigger, although timing varies between individuals. Your doctor can help interpret your personal timeline.</p></div>
+<div class="cn-timeline">${[6,5,4,3,2,1].map(n=>`<div class="tl-item"><span class="tl-date">${n} month${n>1?'s':''} before${n===1?' / around onset':''}</span><label class="f-label" for="tl-${n}">Events during this period</label><textarea class="f-area" id="tl-${n}" data-key="tl-${n}" placeholder="Any illnesses, stressors, medications, or significant events\u2026" style="min-height:3rem"></textarea></div>`).join('')}</div>`
+    }));
+    pages.push(D());
+
+    // Trigger Checklist
+    pages.push(BaseCard({id:'p-triggers',pgn:6,section:'My Hair Journey',badge:'Section 3',accent:'',title:'Trigger Checklist',sub:'Tick all that apply \u2014 even events that seemed minor or coincidental.',closer:null,
+      body:`<p class="cn-body">Your doctor will help you understand which, if any, are relevant to your situation.</p>
+${Checklist({items:['High fever','Viral illness','COVID-19','Dengue','Surgery','Childbirth','Major emotional stress','Rapid weight loss','Crash dieting','New medication started','Thyroid disorder','Iron deficiency','Vitamin B12 deficiency','Vitamin D deficiency','PCOS (if applicable)','Hospitalisation','Tight hairstyles or traction','Chemical treatments','Unsure','Other (see notes below)'],prefix:'trig',cols:2})}
+<div class="f-group" style="margin-top:.8rem"><label class="f-label" for="trig-notes">Additional notes on triggers</label><textarea class="f-area" id="trig-notes" data-key="trig-notes" placeholder="Anything else that might be relevant\u2026"></textarea></div>`
+    }));
+    pages.push(D());
+
+    // Pattern
+    pages.push(BaseCard({id:'p-pattern',pgn:7,section:'My Hair Journey',badge:'Section 4',accent:'',title:'Understanding My Pattern',sub:'Select what best matches your experience.',closer:null,
+      body:`${Checklist({items:['Sudden increased shedding \u2014 noticeably more hair on the pillow, in the shower, or on the brush','Gradual thinning \u2014 hair feels less dense over time','Receding hairline','Widening part','Diffuse thinning across the scalp','Round or oval bald patch(es)','Multiple patchy areas of loss','Unsure \u2014 I am not certain how to describe it'],prefix:'pat',cols:1})}
+<div class="cn-callout"><span class="cl-lbl">Reminder</span><p class="cl-body">Only a qualified healthcare professional can diagnose the exact type of hair loss. This section helps you describe your experience clearly at your appointment.</p></div>
+<div class="cn-ref"><span class="ref-lbl">In Your Own Words</span><p class="ref-q">How would you describe the change to someone who has not seen it?</p><textarea class="f-area lg" data-key="pat-desc" placeholder="Your description in your own language is valuable." aria-label="Describe the pattern of your hair loss"></textarea></div>`
+    }));
+    pages.push(D());
+
+    // Red Flags
+    pages.push(BaseCard({id:'p-redflags',pgn:8,section:'My Hair Journey',badge:'Important',accent:'brick',title:'Red Flags \u2014 When to Seek Prompt Attention',sub:'Most hair loss does not require emergency evaluation. However, some situations deserve prompt medical attention.',closer:null,
+      body:`${Checklist({items:['Sudden bald patches appearing over days','Painful scalp','Burning sensation on the scalp','Pus or discharge from the scalp','Rapidly progressive hair loss','Scarring or shiny, smooth scalp at the site of loss','Scalp swelling or warmth','Hair loss accompanied by fever or unexplained weight loss','Hair loss in a child with scalp inflammation','Complete or near-complete scalp or body hair loss'],prefix:'rf',cols:1})}
+<div class="cn-safety"><span class="sa-lbl">Safety Note</span><p class="note-body">If any of the above apply, please consult a qualified healthcare professional promptly. This companion does not replace medical assessment.</p></div>`
+    }));
+    pages.push(D());
+
+    pages.push(PullQuote({text:'Scalp hair grows on average about 1\u2009cm per month, although individual rates vary. Progress is measured in months \u2014 not days.',variant:'dark',pgn:10}));
+    pages.push(MythCard({myth:'Oil massages and herbal serums regrow hair.',fact:'There is no robust clinical evidence that scalp oils or herbal preparations meaningfully regrow hair. Some may benefit scalp comfort. For meaningful regrowth, consult your dermatologist about treatments with clinical evidence.'}));
+    pages.push(D());
+
+    // ══ PART TWO ══════════════════════════════════
+    pages.push(ChapterHeader({part:'Part Two',title:'Monthly Tracking',description:'Consistent, objective observation over time is more valuable than daily worry.',accent:'#7a9e8a',icon:'\u25c7',pgn:11}));
+    pages.push(D());
+
+    // Shedding Tracker
+    pages.push(BaseCard({id:'p-shedding',pgn:11,section:'Monthly Tracking',badge:'Section 5',accent:'sage',title:'Monthly Shedding Tracker',sub:'Rather than counting individual hairs, record the overall trend you notice each month.',closer:null,
+      body:`<p class="cn-body">Daily variation in shedding is normal and can be misleading. Monthly comparison is more meaningful.</p>
+${MonthGrid({prefix:'shed'})}
+<div class="cn-callout sage"><span class="cl-lbl">Clinical Note</span><p class="cl-body">Some treatments may be associated with an initial increase in shedding in certain individuals. This does not necessarily indicate treatment failure and should be discussed with your doctor.</p></div>`
+    }));
+    pages.push(D());
+
+    // Photo Diary
+    pages.push(BaseCard({id:'p-photos',pgn:12,section:'Monthly Tracking',badge:'Section 6',accent:'',title:'Hair Photo Diary',sub:'Standardised monthly photographs are one of the most useful tools for tracking progress objectively.',closer:null,
+      body:`<div class="cn-photo-grid" role="group" aria-label="Photo positions">${['Front','Left Profile','Right Profile','Top','Crown','Hairline'].map(l=>`<div class="cn-photo-slot"><span class="ps-icon" aria-hidden="true">\u25cb</span><span class="ps-lbl">${l}</span></div>`).join('')}</div>
+<div class="cn-callout"><span class="cl-lbl">Consistency Tips</span><p class="cl-body">Same lighting \u00b7 Same hairstyle \u00b7 Dry hair \u00b7 Same camera \u00b7 Same distance \u00b7 Same time of day \u00b7 Once every four weeks. Save to a dedicated album labelled with the date.</p></div>
+<div class="f-group" style="margin-top:1rem"><label class="f-label" for="photo-notes">Notes from this month\u2019s photos</label><textarea class="f-area" id="photo-notes" data-key="photo-notes" placeholder="What do you notice when comparing to last month?"></textarea></div>`
+    }));
+    pages.push(D());
+
+    // Scalp Tracker
+    pages.push(BaseCard({id:'p-scalp',pgn:13,section:'Monthly Tracking',badge:'Section 7',accent:'',title:'Scalp Symptom Tracker',sub:'Rate each symptom monthly: 0\u2009=\u2009none, 1\u2009=\u2009mild, 2\u2009=\u2009moderate, 3\u2009=\u2009significant.',closer:null,
+      body:DataTable({
+        cols:['Symptom','M1','M2','M3','M4','M5','M6'],
+        prefix:'scalp',
+        rows:['Itching','Burning','Tenderness','Pain','Scaling','Redness','Oiliness','Dandruff','Flaking','Excessive breakage'].map((s,i)=>[
+          s,...[0,1,2,3,4,5].map(m=>(ri,ci,pfx)=>`<input data-key="scalp-${i}-${m}" placeholder="\u2014" aria-label="${s} month ${m+1} score" style="width:36px;text-align:center;min-height:36px">`)
+        ])
+      })
+    }));
+    pages.push(D());
+
+    // ══ PART THREE ════════════════════════════════
+    pages.push(ChapterHeader({part:'Part Three',title:'Treatment Record',description:'A precise record of medications, procedures, and how you are responding.',accent:'#c09553',icon:'\u25c8',pgn:20}));
+    pages.push(D());
+
+    // Medication Log
+    pages.push(BaseCard({id:'p-meds',pgn:20,section:'Treatment Record',badge:'Section 8',accent:'ochre',variant:'warm',title:'Medication & Treatment Log',sub:'A record of what you are taking, when you started, and how you are finding it.',closer:null,
+      body:`<div class="cn-safety"><span class="sa-lbl">Safety Note</span><p class="note-body">Never start prescription medicines without medical supervision. This log is for recording treatments prescribed by a qualified healthcare professional.</p></div>
+<div style="overflow-x:auto"><table class="cn-table"><thead><tr><th scope="col">Medication / Supplement</th><th scope="col">Dose</th><th scope="col">Start Date</th><th scope="col">Consistency</th><th scope="col">Side Effects</th><th scope="col">Doctor Instructions</th></tr></thead><tbody>${['Topical minoxidil','Oral minoxidil (if prescribed)','Finasteride (if prescribed)','Dutasteride (if prescribed)','Supplement 1','Supplement 2','Other medicine'].map((m,i)=>`<tr>
+<td><span style="font-size:.82rem;color:var(--ink-light)">${m}</span><br><input data-key="med-name-${i}" aria-label="${m} name" placeholder="Confirm/edit" style="font-size:.8rem;border:none;border-bottom:1px solid rgba(74,144,138,.15);background:transparent;outline:none;width:100%;min-height:36px"></td>
+<td><input data-key="med-dose-${i}" aria-label="${m} dose" placeholder="mg/ml" style="min-height:36px"></td>
+<td><input type="date" data-key="med-start-${i}" aria-label="${m} start date"></td>
+<td><input data-key="med-cons-${i}" aria-label="${m} consistency" placeholder="Daily\u2026" style="min-height:36px"></td>
+<td><textarea data-key="med-se-${i}" aria-label="${m} side effects" placeholder="Any\u2026" style="min-height:2rem"></textarea></td>
+<td><textarea data-key="med-note-${i}" aria-label="${m} doctor instructions" placeholder="\u2026" style="min-height:2rem"></textarea></td>
+</tr>`).join('')}</tbody></table></div>
+<div class="cn-pearl"><span class="pearl-lbl">Doctor\u2019s Pearl</span><p class="pearl-body">Minoxidil requires consistent daily use \u2014 missing doses regularly reduces its effectiveness. If you experience difficulty with adherence, discuss this with your doctor before stopping.</p></div>`
+    }));
+    pages.push(D());
+
+    // Procedures
+    pages.push(BaseCard({id:'p-procedures',pgn:21,section:'Treatment Record',badge:'Section 9',accent:'ochre',title:'Procedures Record',sub:'Log any dermatologist-recommended procedures and your response to them.',closer:null,
+      body:`<div style="overflow-x:auto"><table class="cn-table"><thead><tr><th scope="col">Procedure</th><th scope="col">Date</th><th scope="col">Sessions</th><th scope="col">Response</th><th scope="col">Follow-up</th></tr></thead><tbody>${['PRP (Platelet Rich Plasma)','Microneedling','Hair Transplant','Low-Level Light Therapy','Other (specify below)'].map((p,i)=>`<tr><td style="font-size:.82rem">${p}</td><td><input type="date" data-key="proc-date-${i}" aria-label="${p} date"></td><td><input data-key="proc-sess-${i}" placeholder="#" aria-label="${p} sessions" style="width:44px;min-height:36px"></td><td><textarea data-key="proc-resp-${i}" aria-label="${p} response" placeholder="\u2026" style="min-height:2rem"></textarea></td><td><textarea data-key="proc-adv-${i}" aria-label="${p} follow-up" placeholder="\u2026" style="min-height:2rem"></textarea></td></tr>`).join('')}</tbody></table></div>
+<div class="f-group" style="margin-top:.5rem"><label class="f-label" for="proc-other">Other procedure details</label><textarea class="f-area" id="proc-other" data-key="proc-other" placeholder="Specify any other procedures\u2026"></textarea></div>`
+    }));
+    pages.push(D());
+
+    // Side Effects Diary
+    pages.push(BaseCard({id:'p-sideeffects',pgn:22,section:'Treatment Record',badge:'Section 10',accent:'',title:'Side Effects Diary',sub:'Document any new symptoms that may be related to treatment.',closer:null,
+      body:`<div style="overflow-x:auto"><table class="cn-table"><thead><tr><th scope="col">Symptom</th><th scope="col">Severity (0\u20133)</th><th scope="col">Date Noticed</th><th scope="col">Discussed with Doctor?</th><th scope="col">Outcome</th></tr></thead><tbody>${[1,2,3,4,5,6].map(i=>`<tr><td><input data-key="se-sym-${i}" aria-label="Side effect ${i} symptom" placeholder="Describe\u2026" style="min-height:36px"></td><td><input data-key="se-sev-${i}" aria-label="Severity" placeholder="0\u20133" style="width:44px;text-align:center;min-height:36px"></td><td><input type="date" data-key="se-date-${i}" aria-label="Date noticed"></td><td><input data-key="se-disc-${i}" aria-label="Discussed with doctor" placeholder="Yes / No" style="min-height:36px"></td><td><input data-key="se-out-${i}" aria-label="Outcome" placeholder="Resolved\u2026" style="min-height:36px"></td></tr>`).join('')}</tbody></table></div>`
+    }));
+    pages.push(D());
+
+    // Blood Tests
+    pages.push(BaseCard({id:'p-bloods',pgn:23,section:'Investigations',badge:'Section 11',accent:'slate',title:'Blood Test Tracker',sub:'A record of investigations performed, their results, and your doctor\u2019s interpretation.',closer:null,
+      body:`<div class="cn-note"><span class="note-lbl">Reminder</span><p class="note-body">Not everyone with hair loss requires blood tests. Investigations should be guided by a qualified healthcare professional. This tracker records results you have already received \u2014 it does not interpret them.</p></div>
+<div style="overflow-x:auto"><table class="cn-table"><thead><tr><th scope="col">Test</th><th scope="col">Date</th><th scope="col">Result</th><th scope="col">Doctor\u2019s Interpretation</th></tr></thead><tbody>${['CBC (Complete Blood Count)','Ferritin','TSH (Thyroid Stimulating Hormone)','Vitamin D','Vitamin B12','Iron Studies','Zinc','Other (specify)'].map((t,i)=>`<tr><td style="font-size:.82rem">${t}</td><td><input type="date" data-key="bt-date-${i}" aria-label="${t} date"></td><td><input data-key="bt-result-${i}" aria-label="${t} result" placeholder="Value + units" style="min-height:36px"></td><td><textarea data-key="bt-interp-${i}" aria-label="${t} interpretation" placeholder="What your doctor said\u2026" style="min-height:2rem"></textarea></td></tr>`).join('')}</tbody></table></div>
+<div class="cn-pearl"><span class="pearl-lbl">Doctor\u2019s Pearl</span><p class="pearl-body">Ferritin is one of the most commonly relevant tests in hair loss \u2014 but interpreting the number requires clinical context. A result technically within range may still be suboptimal for hair health. Always discuss with your dermatologist.</p></div>`
+    }));
+    pages.push(D());
+
+    // Before Buying
+    pages.push(BaseCard({id:'p-buying',pgn:24,section:'Smart Decisions',badge:'Section 12',accent:'ochre',title:'Before Buying Another Hair Product\u2026',sub:'A practical checklist to protect you from expensive, unproven interventions.',closer:null,
+      body:`<p class="cn-body">The hair care market is saturated with products making dramatic promises. Before purchasing, ask yourself:</p>
+${Checklist({items:['Does it promise instant or guaranteed regrowth?','Does it cite clinical evidence \u2014 and have you verified that evidence is credible?','Has your dermatologist specifically recommended this product?','Is it priced significantly higher than established treatments without justification?','Does it rely primarily on testimonials rather than clinical studies?','Have you already spent significant money on products without measurable improvement?','Are the active ingredients clearly listed, and are any of them evidence-based?'],prefix:'buy',cols:1})}
+<div class="cn-callout brick"><span class="cl-lbl">Guideline</span><p class="cl-body">If you checked more yes items above, reconsider the purchase. Evidence-based treatments prescribed by your doctor are the foundation. Additional products should complement \u2014 never replace \u2014 professional guidance.</p></div>
+<div class="f-group" style="margin-top:.8rem"><label class="f-label" for="buy-notes">Products I am currently considering</label><textarea class="f-area" id="buy-notes" data-key="buy-notes" placeholder="Note any products here for discussion with your doctor\u2026"></textarea></div>`
+    }));
+    pages.push(D());
+
+    pages.push(PullQuote({text:'The correct diagnosis matters more than expensive treatments.',variant:'light',pgn:30}));
+    pages.push(MythCard({myth:'If a treatment worked for my friend, it will work for me.',fact:'Hair loss has multiple causes requiring different treatments. What suits one type may be ineffective or unsuitable for another. Diagnosis must always precede treatment.'}));
+    pages.push(D());
+
+    // ══ PART FOUR ═════════════════════════════════
+    pages.push(ChapterHeader({part:'Part Four',title:'My Consultations',description:'Prepare, record, and reflect \u2014 so every appointment counts.',accent:'#c09553',icon:'\u25a1',pgn:31}));
+    pages.push(D());
+
+    // Pre-consult checklist
+    pages.push(BaseCard({id:'p-preconsult',pgn:31,section:'My Consultations',badge:'Section 13',accent:'ochre',title:'Pre-Consultation Checklist',sub:'Prepare everything before your appointment so the time is spent on understanding \u2014 not searching bags.',closer:null,
+      body:`${Checklist({items:['Previous prescriptions \u2014 bring original boxes or packaging where possible','Laboratory reports \u2014 all blood tests and investigations from the past 12 months','Scalp photographs \u2014 most recent set, plus older photos for comparison','Medication list \u2014 including all supplements and over-the-counter products','This workbook or consultation summary sheet','List of questions prepared in advance','Name and contact of any other doctors currently involved in your care','Details of any products purchased independently (for doctor review)'],prefix:'pc',cols:1})}
+<div class="cn-pearl"><span class="pearl-lbl">Doctor\u2019s Pearl</span><p class="pearl-body">Patients who arrive prepared \u2014 with photographs, medication lists, and written questions \u2014 consistently get more from their consultation. The appointment time is fixed; your preparation determines how it is used.</p></div>`
+    }));
+    pages.push(D());
+
+    // Consultation Planner
+    pages.push(BaseCard({id:'p-consult-plan',pgn:32,section:'My Consultations',badge:'Section 14',accent:'ochre',title:'Consultation Planner',sub:'Prepare for your appointment so you make the most of the time available.',closer:null,
+      body:`<div class="f-group"><label class="f-label" for="cp-worry">What worries me most right now?</label><textarea class="f-area" id="cp-worry" data-key="cp-worry" placeholder="Be specific \u2014 what is weighing on you?"></textarea></div>
+<div class="f-group"><label class="f-label" for="cp-changes">What changes have I noticed since my last visit?</label><textarea class="f-area" id="cp-changes" data-key="cp-changes" placeholder="Better, worse, or unchanged?"></textarea></div>
+<div class="f-group"><label class="f-label">My questions for this appointment (in order of priority)</label>
+<ol class="cn-ol">${[1,2,3,4,5].map(i=>`<li><input class="f-input" id="cp-q-${i}" data-key="cp-q-${i}" placeholder="Question ${i}\u2026" aria-label="Question ${i} for doctor"></li>`).join('')}</ol></div>
+<div class="cn-note"><span class="note-lbl">Suggested Questions</span><p class="note-body">What is my diagnosis? \u00b7 Do I need further tests? \u00b7 What treatments are recommended and why? \u00b7 When should I expect to see improvement? \u00b7 What side effects should I monitor? \u00b7 When should I return?</p></div>`
+    }));
+    pages.push(D());
+
+    // Consultation Summary
+    pages.push(BaseCard({id:'p-consult-sum',pgn:33,section:'My Consultations',badge:'Printable',accent:'ochre',variant:'warm',title:'Consultation Summary Sheet',sub:'A one-page printable summary to take to your appointment or share with other treating doctors.',closer:null,
+      body:`<div class="cn-consult-card">
+<div class="cn-consult-grid">
+${[['cs-diag','Diagnosis','As told to you by your doctor\u2026'],['cs-sym','Main Symptoms','Your main presenting symptoms\u2026'],['cs-timeline','Timeline','When it started and how it has changed\u2026'],['cs-meds','Current Medications','All medications and supplements\u2026'],['cs-inv','Investigations','Tests performed and key results\u2026'],['cs-proc','Procedures','Procedures and dates\u2026'],['cs-se','Side Effects Noted','Any side effects experienced\u2026'],['cs-concerns','Top Concerns','Your most important questions\u2026']].map(([key,lbl,ph])=>`<div class="consult-zone"><span class="cz-lbl">${lbl}</span><textarea class="f-area" data-key="${key}" aria-label="${lbl}" placeholder="${ph}" style="min-height:3rem"></textarea></div>`).join('')}
+</div>
+<div class="f-group" style="margin-top:1rem"><span class="cz-lbl">Follow-up Date</span><input type="date" class="f-input" data-key="cs-followup" aria-label="Follow-up appointment date" style="max-width:200px"></div>
+</div>
+<div style="margin-top:1rem"><button class="cn-btn" onclick="window.print()" aria-label="Print consultation summary">\ud83d\udda8 Print Summary</button></div>`
+    }));
+    pages.push(D());
+
+    // Forgotten Questions
+    pages.push(BaseCard({id:'p-forgotten',pgn:34,section:'My Consultations',badge:'Section 15',accent:'',title:'Questions I Forgot to Ask',sub:'Every consultation ends with forgotten questions. Capture them here the moment they occur.',closer:null,
+      body:`<div class="f-group"><label class="f-label" for="fq-next">Questions for my next visit</label><textarea class="f-area lg" id="fq-next" data-key="fq-next" placeholder="Write them down the moment they occur to you, between appointments\u2026"></textarea></div>
+<div class="f-group"><label class="f-label" for="fq-explain">Things I want explained again, more clearly</label><textarea class="f-area" id="fq-explain" data-key="fq-explain" placeholder="Topics the doctor mentioned that I did not fully understand\u2026"></textarea></div>
+<div class="f-group"><label class="f-label" for="fq-terms">Terms I did not understand</label><textarea class="f-area" id="fq-terms" data-key="fq-terms" placeholder="Medical words I heard but could not follow \u2014 look them up in the glossary or ask next time\u2026"></textarea></div>
+<div class="cn-ref"><span class="ref-lbl">After Your Appointment</span><p class="ref-q">What did I learn today that I did not know before?</p><textarea class="f-area" data-key="fq-learned" aria-label="What I learned at today's appointment" placeholder="Note the key things you understood better after this visit\u2026"></textarea></div>`
+    }));
+    pages.push(D());
+
+    // Treatment Timeline
+    pages.push(BaseCard({id:'p-tx-timeline',pgn:35,section:'Treatment Journey',badge:'Section 16',accent:'',title:'My Treatment Timeline',sub:'A chronological record of your treatment journey \u2014 changes, milestones, and reflections.',closer:null,
+      body:`<div class="cn-timeline">${[1,2,3,4,5,6,7,8].map(i=>`<div class="tl-item"><span class="tl-date"><input type="date" data-key="txtime-date-${i}" aria-label="Treatment event ${i} date" style="border:none;background:transparent;font-family:var(--serif);font-size:.68rem;color:var(--teal);opacity:.7;outline:none;min-height:36px"></span><label class="f-label" for="txtime-note-${i}" style="margin-top:.2rem">Notes</label><textarea class="f-area" id="txtime-note-${i}" data-key="txtime-note-${i}" placeholder="Treatment change, procedure, milestone, or observation\u2026" style="min-height:3rem"></textarea></div>`).join('')}</div>`
+    }));
+    pages.push(D());
+
+    // ══ PART FIVE ═════════════════════════════════
+    pages.push(ChapterHeader({part:'Part Five',title:'Reflection & Commitments',description:'Honest monthly reflection. Small, steady steps compound into meaningful progress.',accent:'#4a908a',icon:'\u25e6',pgn:40}));
+    pages.push(D());
+
+    // Lifestyle Dashboard
+    pages.push(BaseCard({id:'p-lifestyle',pgn:40,section:'Lifestyle',badge:'Section 17',accent:'sage',title:'Lifestyle Dashboard',sub:'A monthly review of habits that support hair health and overall wellbeing.',closer:null,
+      body:DataTable({
+        cols:['Habit','M1','M2','M3','M4','M5','M6'],
+        prefix:'life',
+        rows:['Adequate protein intake','Balanced nutrition overall','Sleep quality and duration','Physical activity','Stress management','Medication adherence','Consistent hair care routine','Avoiding tight hairstyles','Reducing chemical exposure'].map((h,i)=>[
+          h,...[0,1,2,3,4,5].map(m=>(ri,ci,pfx)=>`<input data-key="life-${i}-${m}" placeholder="0\u20132" aria-label="${h} month ${m+1}" style="width:36px;text-align:center;min-height:36px">`)
+        ])
+      }) + '<p class="cn-body" style="margin-top:.6rem;font-size:.82rem;opacity:.55">0\u2009=\u2009Needs attention\u2003\u00b7\u2003 1\u2009=\u2009Reasonable\u2003\u00b7\u2003 2\u2009=\u2009Good</p>'
+       + `<div class="cn-ref" style="margin-top:.8rem"><span class="ref-lbl">Monthly Reflection</span><p class="ref-q">Which habit made the biggest difference this month? Which needs the most attention next month?</p><textarea class="f-area" data-key="life-reflect" aria-label="Monthly lifestyle reflection" placeholder="Write a brief note each month\u2026"></textarea></div>`
+    }));
+    pages.push(D());
+
+    // Monthly Reflection
+    pages.push(BaseCard({id:'p-reflect',pgn:41,section:'Monthly Reflection',badge:'Section 18',accent:'sage',title:'Monthly Reflection',sub:'Complete this each month. Small, honest reflections compound into meaningful insight.',closer:null,
+      body:ReflectionMonthGrid({prefix:'refl'})
+    }));
+    pages.push(D());
+
+    // Action Plan
+    pages.push(BaseCard({id:'p-action',pgn:42,section:'My Commitments',badge:'Section 19',accent:'',title:'Personal Action Plan',sub:'Your commitments to yourself. Review and re-commit monthly.',closer:null,
+      body:ActionChecklist({prefix:'act',items:[
+        'Take prescribed treatment consistently \u2014 this is the single most important factor.',
+        'Avoid miracle cures, unproven supplements, and products that make dramatic promises.',
+        'Compare photographs monthly, not daily \u2014 scalp hair grows on average about 1\u2009cm per month.',
+        'Eat balanced, protein-rich meals to support hair health.',
+        'Prioritise adequate sleep each night.',
+        'Attend follow-up appointments as scheduled.',
+        'Discuss any concerns with my doctor before changing or stopping treatment.',
+        'Be patient with the hair growth cycle \u2014 meaningful improvement takes months.',
+        'Track symptoms and changes so I can report them accurately.',
+        'Remember: my worth is not defined by my hair.'
+      ]})
+    }));
+    pages.push(D());
+
+    // Progress Scores Dashboard
+    pages.push(BaseCard({id:'p-prog-scores',pgn:43,section:'Progress Dashboard',badge:'Section 20',accent:'',title:'Progress Scores Dashboard',sub:'Score each dimension monthly from 0 to 10. Notice trends across time.',closer:null,
+      body:DataTable({
+        cols:['Dimension','M1','M2','M3','M4','M5','M6'],
+        prefix:'prog',
+        rows:['Shedding (10\u2009=\u2009much less than baseline)','Hair density (10\u2009=\u2009much improved)','Scalp comfort (10\u2009=\u2009fully comfortable)','Confidence about recovery (10\u2009=\u2009very confident)','Anxiety about hair loss (0\u2009=\u2009none at all)','Satisfaction with appearance (10\u2009=\u2009very satisfied)','Treatment consistency (10\u2009=\u2009perfect adherence)'].map((d,i)=>[
+          d,...[0,1,2,3,4,5].map(m=>(ri,ci,pfx)=>`<input data-key="prog-${i}-${m}" type="number" min="0" max="10" placeholder="\u2014" aria-label="${d} month ${m+1}" style="width:42px;text-align:center;min-height:36px">`)
+        ])
+      })
+    }));
+    pages.push(D());
+
+    pages.push(PullQuote({text:'Consistency beats quick fixes. Daily treatment compliance over months matters more than any single session.',variant:'dark',pgn:50}));
+
+    // ══ PART SIX ══════════════════════════════════
+    pages.push(ChapterHeader({part:'Part Six',title:'Understanding Hair Loss',description:'Evidence, realistic expectations, and the truths that guide confident recovery.',accent:'#7a9e8a',icon:'\u25ce',pgn:51}));
+    pages.push(D());
+
+    // Ten Truths
+    pages.push(BaseCard({id:'p-truths',pgn:51,section:'Understanding Hair Loss',badge:'Section 21',accent:'',title:'Ten Hair Loss Truths',sub:'Evidence-based principles to guide your journey.',closer:null,
+      body:`<ol class="cn-ol">
+<li>Most dramatic shedding is temporary \u2014 many people recover fully once the trigger is addressed.</li>
+<li>Hair shedding related to telogen effluvium commonly begins around two to four months after a trigger, although timing varies between individuals.</li>
+<li>Early diagnosis often helps preserve more hair \u2014 do not wait unnecessarily.</li>
+<li>The correct diagnosis matters more than expensive treatments. Understand what you are treating first.</li>
+<li>Scalp hair grows on average about 1\u2009cm per month, although individual rates vary. Progress requires patience.</li>
+<li>Consistency beats quick fixes. Daily treatment compliance over months matters more than any single session.</li>
+<li>Monthly progress is more meaningful than daily observation. Step back and compare over time.</li>
+<li>Not everyone needs extensive blood tests. Your doctor will guide investigations based on your history.</li>
+<li>Miracle cures deserve scepticism. No topical product or supplement grows significant hair overnight.</li>
+<li>Your worth is never defined by your hair.</li>
+</ol>`
+    }));
+    pages.push(D());
+
+    // Myths
+    pages.push(BaseCard({id:'p-myths',pgn:52,section:'Myth vs Fact',badge:'Bonus',accent:'ochre',title:'Common Myths About Hair Loss',sub:'Misinformation about hair loss is widespread. Clear thinking is part of the treatment.',closer:null,
+      body:[
+        ['Washing hair too often causes hair loss.','Washing frequency does not cause hair loss. Shedding during washing consists of hairs already in the resting phase \u2014 they would have shed regardless. A clean, healthy scalp is generally beneficial.'],
+        ['Cutting hair makes it grow back thicker.','Hair thickness is determined by the follicle, not shaft length. Cutting has no effect on growth rate, density, or follicle health.'],
+        ['Hair loss is always permanent.','Many causes \u2014 including telogen effluvium, nutritional deficiencies, and some forms of alopecia areata \u2014 are reversible with appropriate treatment. Diagnosis determines prognosis.'],
+        ['Only older men lose hair.','Hair loss affects people of all ages and sexes. Female-pattern hair loss is very common and frequently underdiagnosed.'],
+        ['Oil massages and herbal remedies grow hair back.','There is no robust clinical evidence that scalp oils or herbal preparations meaningfully regrow hair. Medical treatments with proven evidence should be discussed with a dermatologist.'],
+        ['If a treatment worked for my friend, it will work for me.','Hair loss has multiple causes requiring different treatments. What suits one type may be ineffective or unsuitable for another. Diagnosis first.'],
+      ].map(([myth,fact])=>`<div class="cn-myth"><span class="myth-lbl-m">Myth</span><p class="myth-text italic">\u201c${myth}\u201d</p><span class="myth-lbl-f">Fact</span><p class="myth-text">${fact}</p></div>`).join('')
+    }));
+    pages.push(D());
+
+    // Treatment Expectations
+    pages.push(BaseCard({id:'p-expectations',pgn:53,section:'Realistic Expectations',badge:'Bonus',accent:'sage',title:'Realistic Treatment Expectations',sub:'Understanding timelines helps you stay consistent when it feels like nothing is happening.',closer:null,
+      body:`<div class="cn-timeline">
+<div class="tl-item"><span class="tl-date">Weeks 1\u20134</span><p class="note-body">Treatment begins. Some treatments may be associated with an initial increase in shedding in certain individuals. This does not necessarily indicate treatment failure \u2014 discuss with your doctor if concerned.</p></div>
+<div class="tl-item"><span class="tl-date">Months 2\u20133</span><p class="note-body">Shedding may begin to slow. New fine hairs may emerge. Progress is subtle at this stage and can be missed without photographs.</p></div>
+<div class="tl-item"><span class="tl-date">Months 4\u20136</span><p class="note-body">Visible improvement may become apparent for some individuals. Hair density may start improving. Confidence in the treatment is often higher at this stage.</p></div>
+<div class="tl-item"><span class="tl-date">Months 6\u201312</span><p class="note-body">Significant improvement may be evident. Full assessment of treatment response often happens here. Your doctor may adjust your plan based on results.</p></div>
+<div class="tl-item"><span class="tl-date">12 months and beyond</span><p class="note-body">Many hair loss treatments require long-term maintenance. Stopping prematurely often leads to reversal of gains. Follow your doctor\u2019s guidance on duration.</p></div>
+</div>
+<div class="cn-callout"><span class="cl-lbl">Important</span><p class="cl-body">The above is a general illustration. Your timeline depends on diagnosis, treatment type, age, and biology. Only your doctor can give a personalised prognosis.</p></div>
+<div class="cn-pearl"><span class="pearl-lbl">Doctor\u2019s Pearl</span><p class="pearl-body">The most common reason treatments fail is that they are stopped too early. Set a realistic review date with your doctor \u2014 usually at six months \u2014 rather than evaluating week by week.</p></div>`
+    }));
+    pages.push(D());
+
+    // Glossary
+    pages.push(BaseCard({id:'p-glossary',pgn:54,section:'Glossary',badge:'Reference',accent:'',title:'Companion Glossary',sub:'Plain-language explanations of terms your doctor may use.',closer:null,
+      body:[
+        ['Anagen','The active growth phase of the hair cycle, during which the follicle produces a hair shaft. Scalp hairs typically remain in anagen for two to six years.'],
+        ['Telogen','The resting phase of the hair cycle. The follicle is not actively growing. The hair eventually sheds and the follicle re-enters anagen.'],
+        ['Telogen effluvium','A common form of diffuse hair shedding in which a significant number of follicles shift prematurely into the resting phase, usually triggered by a physical or emotional stressor. Shedding commonly begins around two to four months after the trigger, although timing varies.'],
+        ['Follicle miniaturisation','A gradual shrinking of hair follicles over time, producing progressively finer and shorter hairs. Central to androgenetic alopecia.'],
+        ['Androgenetic alopecia','The most common cause of hair loss in both men and women, caused by genetic sensitivity of hair follicles to androgens. Also called male-pattern or female-pattern hair loss.'],
+        ['Alopecia areata','An autoimmune condition in which the immune system attacks hair follicles, causing patchy hair loss on the scalp, beard, or elsewhere.'],
+        ['Ferritin','A protein that stores iron in the body. Low ferritin levels may contribute to hair shedding in some individuals. Interpretation requires clinical context.'],
+        ['PRP (Platelet-Rich Plasma)','A procedure using a concentrated preparation of the patient\u2019s own platelets, injected into the scalp. Evidence is emerging but variable.'],
+        ['Trichoscopy','A non-invasive technique using dermoscopy to examine the scalp and hair at magnification, helping diagnose different hair loss types without biopsy.'],
+        ['Minoxidil','A topical or oral medication used to promote hair growth and slow hair loss. One of the few treatments with robust clinical evidence. Requires consistent long-term use.'],
+        ['Finasteride / Dutasteride','Prescription oral medications that inhibit conversion of testosterone to DHT, primarily used in androgenetic alopecia. Require medical supervision.'],
+      ].map(([w,d],i,arr)=>`<div class="cn-gloss-item"><p class="gloss-w">${w}</p><p class="gloss-d">${d}</p></div>${i<arr.length-1?'<hr class="gloss-hr" aria-hidden="true">':''}`).join('')
+    }));
+    pages.push(D());
+
+    // QR Resources
+    pages.push(BaseCard({id:'p-qr',pgn:55,section:'Future Resources',badge:'Resources',accent:'',title:'Digital Resources & Future Updates',sub:'Reserved space for companion resources as they become available.',closer:null,
+      body:`<p class="cn-body">The Chiranjivi Notes ecosystem continues to grow. As companion resources are published, they will be accessible via the following:</p>
+${QRGrid({slots:[{label:'Companion Videos',desc:'Clinical explanations in accessible language'},{label:'Updated FAQs',desc:'Answers to the most common patient questions'},{label:'Printable Summaries',desc:'Optimised versions for each chapter'},{label:'New Editions',desc:'Updated clinical content as evidence evolves'}]})}
+<div class="cn-callout" style="margin-top:1.2rem"><span class="cl-lbl">Keeping Your Companion Current</span><p class="cl-body">Hair loss research evolves. If you received this companion from a healthcare provider, ask about the most recent edition. The version is noted in the footer of every page.</p></div>`
+    }));
+    pages.push(D());
+
+    // Notes
+    pages.push(BaseCard({id:'p-notes',pgn:56,section:'Notes & Questions',badge:'Notes',accent:'',title:'Notes, Questions & Observations',sub:'A place for everything that does not fit elsewhere.',closer:null,
+      body:`<label class="f-label" for="notes-1">Notes</label><textarea class="f-area lg" id="notes-1" data-key="notes-1" placeholder="Write anything here \u2014 questions between appointments, observations, things you want to remember\u2026" style="min-height:12rem"></textarea>
+<label class="f-label" for="notes-2" style="margin-top:1.5rem">Continue here</label><textarea class="f-area lg" id="notes-2" data-key="notes-2" placeholder="Continue here\u2026" style="min-height:12rem;margin-top:.3rem"></textarea>`
+    }));
+    pages.push(D());
+
+    // Letter to Future Self
+    pages.push(BaseCard({id:'p-letter',pgn:57,section:'A Letter to My Future Self',badge:'Final Reflection',accent:'ochre',title:'A Letter to My Future Self',sub:'Write this whenever you are ready. It may be on day one, or after several months.',closer:null,
+      body:`<p class="cn-body">Many people navigating hair loss carry quiet fears about the future. A letter written today \u2014 honestly, without editing \u2014 becomes a record that a future version of you will be grateful to read.</p>
+<div class="cn-letter">
+<p style="font-family:var(--serif);font-style:italic;font-size:.78rem;color:var(--ink-faint);margin-bottom:1.4rem;opacity:.65">To myself, written on <input type="date" data-key="letter-date" aria-label="Letter date" style="border:none;border-bottom:1px solid rgba(74,144,138,.2);background:transparent;font-family:var(--serif);font-size:.78rem;color:var(--ink-light);outline:none;padding:.2rem 0;min-height:36px"></p>
+<label class="f-label" for="letter-body" style="display:none">Letter to future self</label>
+<textarea class="f-area lg" id="letter-body" data-key="letter-body" aria-label="Letter to my future self" placeholder="What are you afraid of right now? What do you hope for? What do you want to remember about this moment?&#10;&#10;Write freely. This page is only for you." style="min-height:18rem;border-bottom-color:rgba(74,144,138,.12);font-style:italic;font-size:1rem;line-height:2"></textarea>
+<p style="font-family:var(--serif);font-style:italic;font-size:.82rem;color:var(--ink-faint);margin-top:1.4rem;opacity:.55">With care,<br><input data-key="letter-sig" class="f-input" aria-label="Your signature" placeholder="Your name" style="max-width:200px;font-style:italic;font-size:.9rem;display:inline-block;width:auto"></p>
+</div>
+<div class="cn-reassure" style="margin-top:1.2rem"><p>Whatever brought you to this page \u2014 you are doing the right thing by seeking understanding.</p></div>`
+    }));
+    pages.push(D());
+
+    // Ecosystem
+    pages.push(EcosystemPage({cards:[
+      {title:'Understanding My Fatigue',desc:'For those whose hair loss is accompanied by persistent tiredness'},
+      {title:'Understanding My Stress',desc:'Chronic stress as a trigger \u2014 explored in depth'},
+      {title:'Understanding My Thyroid',desc:'When thyroid function appears relevant to your hair story'},
+      {title:'Understanding My Metabolic Health',desc:'For those with PCOS, insulin resistance, or metabolic factors'},
+    ]}));
+
+    pages.push(ClosingPage());
+
+
+    /* Quick Start Guide */
+    pages.splice(3, 0, SectionDivider(), BaseCard({id:'p-quickstart',pgn:2,section:'Introduction',badge:'Start Here',accent:'',title:'Quick Start Guide',sub:'Five steps to make the most of this companion \u2014 at your own pace.',closer:null,
+      body:`<p class="cn-body">This companion works best when used consistently over months. Here is the simplest way to begin:</p>
+<ol class="cn-ol">
+<li><strong>Fill in your profile.</strong> Complete My Hair Journey Snapshot with your basic details, timeline of events, and main concern.</li>
+<li><strong>Take baseline photographs.</strong> Six standardised photographs today \u2014 front, sides, top, crown, hairline. Same lighting and distance each month.</li>
+<li><strong>Complete the checklists.</strong> Triggers, pattern, red flags. Even if unsure, tick what applies. This gives your doctor a useful summary.</li>
+<li><strong>Record your current medications.</strong> Include everything \u2014 prescribed medicines, supplements, over-the-counter products.</li>
+<li><strong>Return every four weeks.</strong> Update the Monthly Shedding Tracker, rate symptoms, write a brief reflection. Progress is visible only when compared over time.</li>
+</ol>
+<div class="cn-reassure"><p>You do not need to complete this in one sitting. Every section you fill in makes your next appointment more productive.</p></div>
+<div class="cn-callout"><span class="cl-lbl">If You Only Do One Thing Today</span><p class="cl-body">Complete the Snapshot and take your baseline photographs. Everything else can follow at your own pace.</p></div>`
+    }));
+
+    /* Do Not Panic If */
+    {
+      const truthsIdx = pages.findIndex(p => typeof p === 'string' && p.includes('id="p-truths"'));
+      if (truthsIdx >= 0) {
+        pages.splice(truthsIdx + 2, 0, BaseCard({id:'p-panic',pgn:51,section:'Understanding Hair Loss',badge:'Reassurance',accent:'sage',title:'Do Not Panic If\u2026',sub:'Some experiences during a hair loss journey feel alarming but are entirely expected.',closer:null,
+          body:`<p class="cn-body">The following are common sources of unnecessary distress. Understanding them often reduces anxiety more than any treatment can.</p>
+${[['You notice more hairs after washing or brushing','Loose hairs in the resting phase shed regardless \u2014 they appear together because washing mobilises them simultaneously. The washing itself is not the cause.'],
+   ['Shedding seems worse at certain times of year','Seasonal variation in hair shedding is well-documented. A temporary increase in autumn or spring does not necessarily indicate worsening disease.'],
+   ['Your hair looks thinner when wet','Wet hair clumps together, revealing scalp beneath. This is optical, not a true change in density. Compare dry hair at the same stage each month.'],
+   ['Improvement feels slow day to day','Scalp hair grows on average about 1\u2009cm per month. Monthly photographs are the only reliable way to see subtle progress.'],
+   ['You find hairs on your pillow, clothes, or in the shower','Losing 50\u201310 hairs per day is within the normal range. A significant sustained increase above your personal baseline matters more than any single observation.'],
+   ['Your first month of treatment seems to make shedding worse','Some treatments may be associated with a temporary increase in shedding in certain individuals. Discuss with your doctor before stopping.'],
+   ['Progress feels slow compared to accounts you have read online','Individual responses to treatment vary considerably. Online accounts often represent atypical outcomes. Your doctor is the right benchmark.'],
+].map(([t,b]) => '<div class="cn-evidence" style="margin-bottom:.7rem"><span class="ev-lbl">' + t + '</span><p class="note-body">' + b + '</p></div>').join('')}
+<div class="cn-reassure" style="margin-top:1rem"><p>When in doubt \u2014 note it, photograph it, and bring it to your next appointment. Worry benefits from documentation, not rumination.</p></div>`
+        }), SectionDivider());
+      }
+    }
+
+    /* Myth Table */
+    {
+      const mythsIdx = pages.findIndex(p => typeof p === 'string' && p.includes('id="p-myths"'));
+      if (mythsIdx >= 0) {
+        pages.splice(mythsIdx + 2, 0, BaseCard({id:'p-myth-table',pgn:52,section:'Myth vs Fact',badge:'Quick Reference',accent:'ochre',title:'Myth vs Fact \u2014 At a Glance',sub:'A quick-reference summary for patients and caregivers.',closer:null,
+          body:`<div style="overflow-x:auto"><table class="cn-table"><thead><tr><th scope="col">Common Belief</th><th scope="col">What the Evidence Shows</th></tr></thead><tbody>
+${[['Shampoo causes baldness','Usually false. Washing frequency does not cause hair loss.'],
+   ['Oiling reverses genetic hair loss','Not supported by evidence.'],
+   ['Shaving makes hair grow back thicker','False. Shaving has no effect on follicle size or density.'],
+   ['Every shed hair means worsening disease','False. Losing 50\u2013100 hairs per day is within the normal range.'],
+   ['Supplements help everyone','Not necessarily. They address deficiencies; they do not regrow hair where none exists.'],
+   ['Hair loss only affects older men','False. Hair loss affects all ages and sexes.'],
+   ['Stress alone causes permanent loss','Significant stress can trigger telogen effluvium, usually reversible once the stressor resolves.'],
+   ['More expensive means more effective','Not reliably. Minoxidil \u2014 one of the most evidence-backed treatments \u2014 is widely available.'],
+].map(([m,f]) => '<tr><td style="font-size:.88rem;font-style:italic;color:var(--ink-light)">' + m + '</td><td style="font-size:.88rem">' + f + '</td></tr>').join('')}
+</tbody></table></div>`
+        }), SectionDivider());
+      }
+    }
+
+    /* My Wins */
+    {
+      const ecoIdx = pages.findIndex(p => typeof p === 'string' && p.includes('cn-ecosystem'));
+      if (ecoIdx >= 0) {
+        pages.splice(ecoIdx, 0, SectionDivider(), BaseCard({id:'p-wins',pgn:58,section:'Celebrating Progress',badge:'My Wins',accent:'sage',title:'My Wins',sub:'A dedicated space for noticing what is going right.',closer:null,
+          body:`<p class="cn-body">Hair loss journeys are long. Progress is slow and often invisible month to month. This page exists to record evidence that things are moving in the right direction \u2014 however small.</p>
+<div class="cn-ref ochre"><span class="ref-lbl">Wins I Have Noticed</span><p class="ref-q">Reduced shedding, better adherence, a healthier habit, a successful appointment, a moment of confidence \u2014 record any positive change here.</p>
+<textarea class="f-area lg" data-key="wins-list" aria-label="My wins and positive changes" placeholder="Month 1: Noticed fewer hairs on the pillow\u2026&#10;Month 2: Remembered my medication every day this week\u2026&#10;Month 3: Felt less anxious at a social event\u2026"></textarea></div>
+<div class="cn-month-grid" style="margin-top:1.2rem">${['Month 1','Month 2','Month 3','Month 4','Month 5','Month 6'].map((m,i) => '<div class="cn-month-card"><span class="mc-lbl">' + m + '</span><label class="f-label" for="wins-m-' + i + '">Biggest win this month</label><textarea class="f-area" id="wins-m-' + i + '" data-key="wins-m-' + i + '" placeholder="Something that went well\u2026" style="min-height:3rem" aria-label="' + m + ' biggest win"></textarea></div>').join('')}</div>
+<div class="cn-reassure" style="margin-top:1rem"><p>Progress is not always visible in the mirror. Sometimes the win is simply showing up for yourself again today.</p></div>`
+        }));
+      }
+    }
+
+
+    return pages;
+  }
+};
+
+/* ── Global helpers ───────────────────────────── */
+function confirmReset() {
+  if (confirm('This will clear all your responses from this device. Are you sure?')) {
+    StorageManager.clear();
+    AppState.firstInput = false;
+    Toast.show('Responses cleared \u2014 refreshing\u2026', 1800);
+    setTimeout(() => WorkbookRenderer.render(), 1800);
+  }
+}
+
+/* ── Boot ─────────────────────────────────────── */
+window.addEventListener('DOMContentLoaded', () => {
+  FontController.init();
+  SplashController.init();
+});
+
+/* ExportManager */
+const ExportManager = {
+  exportText() {
+    const fields = StorageManager.load() || {};
+    const SEP = '─'.repeat(55);
+    const lines = [
+      'CHIRANJIVI NOTES® — Hair Loss Companion Kit',
+      'Data Export — ' + new Date().toLocaleDateString(),
+      SEP, ''
+    ];
+    const map = {
+      'snap-name':'Name','snap-age':'Age','snap-sex':'Sex','snap-occ':'Occupation',
+      'snap-date':'Symptoms first noticed','snap-diet':'Diet',
+      'snap-concern':'Main concern','snap-fam':'Family history',
+      'snap-med':'Medical conditions','snap-meds':'Medications',
+      'cs-diag':'Diagnosis','cs-sym':'Symptoms','cs-timeline':'Timeline',
+      'cs-meds':'Medications (consult)','cs-inv':'Investigations',
+      'cs-se':'Side effects','cs-concerns':'Top concerns','cs-followup':'Follow-up date',
+      'cp-worry':'Pre-consult worry','cp-changes':'Changes noticed',
+      'fq-next':'Questions for next visit','fq-explain':'Things to clarify',
+      'buy-notes':'Products under consideration',
+      'notes-1':'Notes 1','notes-2':'Notes 2',
+      'letter-body':'Letter to future self','wins-list':'My wins',
+    };
+    Object.entries(map).forEach(([k,label]) => {
+      const v = fields[k];
+      if (v && String(v).trim()) {
+        lines.push(label.toUpperCase());
+        lines.push(String(v).trim());
+        lines.push('');
+      }
+    });
+    lines.push('SHEDDING TRACKER');
+    for (let i = 0; i < 6; i++) {
+      const s = fields['shed-shedding-' + i], n = fields['shed-note-' + i];
+      if (s || n) lines.push('  Month ' + (i+1) + ': ' + (s || '—') + (n ? ' | ' + n : ''));
+    }
+    lines.push('');
+    lines.push('MEDICATION LOG');
+    for (let i = 0; i < 7; i++) {
+      const nm = fields['med-name-' + i], d = fields['med-dose-' + i];
+      if (nm || d) lines.push('  ' + (nm || 'Med ' + (i+1)) + ': ' + (d || '—') + ' | Start: ' + (fields['med-start-' + i] || '—'));
+    }
+    lines.push('');
+    lines.push(SEP);
+    lines.push('Chiranjivi Notes® · v2.0 · For personal educational use only');
+    lines.push('This companion does not replace professional medical advice.');
+    const blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'chiranjivi-hair-loss-export.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    Toast.show('Data exported — check your downloads');
+  }
+};
+
+</script>
+</body>
+</html>
